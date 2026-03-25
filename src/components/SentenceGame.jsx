@@ -1,15 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import React, { useState, useEffect } from 'react';
 import WordSlide from './WordSlide';
 import { selectQuestions, checkAnswer, splitSentence } from '../utils/gameHelpers';
-
-// 导入 Swiper 样式
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 /**
  * 句子游戏主组件
@@ -21,7 +12,7 @@ const SentenceGame = () => {
   const [submitted, setSubmitted] = useState({});
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
-  const swiperRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // 读取句子文件
   useEffect(() => {
@@ -61,7 +52,22 @@ const SentenceGame = () => {
     setUserAnswers({});
     setSubmitted({});
     setScore(0);
+    setCurrentSlide(0);
     setGameStarted(true);
+  };
+
+  // 切换到上一题
+  const goToPrevious = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+
+  // 切换到下一题
+  const goToNext = () => {
+    if (currentSlide < questions.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
   };
 
   // 处理答案变化
@@ -101,6 +107,11 @@ const SentenceGame = () => {
     setTimeout(() => {
       startGame();
     }, 100);
+  };
+
+  // 切换到指定题目
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
   };
 
   // 渲染分数显示
@@ -177,32 +188,73 @@ const SentenceGame = () => {
 
     return (
       <div className="flex flex-col h-[calc(100vh-80px)]">
-        {/* Swiper 幻灯片区域 */}
-        <div className="flex-1 p-4 min-h-0">
-          <Swiper
-            ref={swiperRef}
-            modules={[Navigation, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            className="h-full rounded-2xl shadow-xl bg-white"
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
+        {/* 题目切换按钮 */}
+        <div className="flex justify-between items-center p-4 bg-white rounded-t-2xl shadow-md">
+          <button
+            onClick={goToPrevious}
+            disabled={currentSlide === 0}
+            className={`
+              px-6 py-3 rounded-lg font-bold text-lg transition-all
+              ${currentSlide === 0 
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-primary text-white hover:bg-red-500 hover:scale-105'}
+            `}
           >
-            {questions.map((sentence, index) => (
-              <SwiperSlide key={index}>
-                <div className="h-full overflow-auto">
-                  <WordSlide
-                    sentence={sentence}
-                    slideIndex={index}
-                    isSubmitted={submitted[index]?.submitted || false}
-                    isCorrect={submitted[index]?.correct || false}
-                    onAnswerChange={handleAnswerChange}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            ⬅️ 上一题
+          </button>
+          
+          <div className="text-center">
+            <p className="text-lg font-bold text-gray-700">
+              第 {currentSlide + 1} / {questions.length} 题
+            </p>
+          </div>
+          
+          <button
+            onClick={goToNext}
+            disabled={currentSlide === questions.length - 1}
+            className={`
+              px-6 py-3 rounded-lg font-bold text-lg transition-all
+              ${currentSlide === questions.length - 1
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-secondary text-white hover:bg-cyan-500 hover:scale-105'}
+            `}
+          >
+            下一题 ➡️
+          </button>
+        </div>
+
+        {/* 当前题目幻灯片 */}
+        <div className="flex-1 p-4 bg-white">
+          <WordSlide
+            key={currentSlide}
+            sentence={questions[currentSlide]}
+            slideIndex={currentSlide}
+            isSubmitted={submitted[currentSlide]?.submitted || false}
+            isCorrect={submitted[currentSlide]?.correct || false}
+            onAnswerChange={handleAnswerChange}
+          />
+        </div>
+
+        {/* 分页指示器 */}
+        <div className="flex justify-center gap-2 p-4 bg-white border-t">
+          {questions.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`
+                w-3 h-3 rounded-full transition-all
+                ${index === currentSlide 
+                  ? 'bg-primary scale-125' 
+                  : 'bg-gray-300 hover:bg-gray-400'}
+                ${submitted[index]?.submitted 
+                  ? submitted[index]?.correct 
+                    ? 'bg-green-500' 
+                    : 'bg-red-500'
+                  : ''}
+              `}
+              title={`第 ${index + 1} 题`}
+            />
+          ))}
         </div>
 
         {/* 提交按钮 */}
@@ -248,15 +300,13 @@ const SentenceGame = () => {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200">
-        {renderScore()}
-        
-        <div className="container mx-auto">
-          {!gameStarted ? renderStartScreen() : renderGame()}
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200">
+      {renderScore()}
+      
+      <div className="container mx-auto pb-4">
+        {!gameStarted ? renderStartScreen() : renderGame()}
       </div>
-    </DndProvider>
+    </div>
   );
 };
 

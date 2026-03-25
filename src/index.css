@@ -48,32 +48,6 @@ body {
   background: #555;
 }
 
-/* Swiper 自定义样式 */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #4ECDC4 !important;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  width: 40px !important;
-  height: 40px !important;
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 20px !important;
-  font-weight: bold;
-}
-
-.swiper-pagination-bullet {
-  background: #4ECDC4;
-  opacity: 0.6;
-}
-
-.swiper-pagination-bullet-active {
-  background: #FF6B6B;
-  opacity: 1;
-}
-
 /* 动画效果 */
 @keyframes bounce-in {
   0% {
@@ -110,4 +84,10 @@ button:active {
 .card-hover:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 拖拽相关样式 */
+[draggable="true"] {
+  user-select: none;
+  -webkit-user-drag: element;
 }

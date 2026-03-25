@@ -1,17 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import DraggableWord from './DraggableWord';
 import DropZone from './DropZone';
 import { splitSentence, shuffleArray } from '../utils/gameHelpers';
 
 /**
  * 单词幻灯片组件（单个游戏）
- * @param {Object} props - 组件属性
- * @param {string} props.sentence - 完整的句子
- * @param {number} props.slideIndex - 幻灯片索引
- * @param {boolean} props.isSubmitted - 是否已提交答案
- * @param {boolean} props.isCorrect - 答案是否正确
- * @param {Function} props.onAnswerChange - 答案变化回调
- * @param {Function} props.onResetWord - 重置单词回调
  */
 const WordSlide = ({ 
   sentence, 
@@ -36,22 +29,71 @@ const WordSlide = ({
   );
 
   // 处理放置单词
-  const handleWordPlace = useCallback((zoneIndex, word, wordIndex) => {
+  const handleWordPlace = useCallback((zoneIndex, word, originalIndex) => {
     if (isSubmitted) return;
     
-    // 如果该位置已经有单词，先移除
-    const existingWordIndex = userAnswer.findIndex((w, idx) => idx === zoneIndex && w !== null);
+    console.log('放置单词 - Zone:', zoneIndex, '单词:', word, '原索引:', originalIndex);
     
+    // 找到这个单词在 shuffledWords 中的实际索引
+    const wordIndexInArray = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
+    
+    if (wordIndexInArray === -1) {
+      console.log('找不到单词对象');
+      return;
+    }
+    
+    console.log('单词在数组中的索引:', wordIndexInArray);
+    
+    // 检查这个单词是否已经被放置在某个位置
+    const existingZoneIndex = userAnswer.findIndex(w => {
+      if (!w) return false;
+      const existingWordObj = shuffledWords.find(ww => ww.word === w);
+      return existingWordObj && existingWordObj.originalIndex === originalIndex;
+    });
+    
+    console.log('单词当前在位置:', existingZoneIndex);
+    
+    // 使用单次状态更新来完成所有操作
     setUserAnswer(prev => {
       const newAnswer = [...prev];
+      
+      // 如果单词已经在其他位置，先清除那个位置
+      if (existingZoneIndex !== -1 && existingZoneIndex !== zoneIndex) {
+        console.log('清除原位置:', existingZoneIndex);
+        newAnswer[existingZoneIndex] = null;
+      }
+      
+      // 检查目标位置是否已经有其他单词
+      if (newAnswer[zoneIndex] !== null && newAnswer[zoneIndex] !== word) {
+        const oldWord = newAnswer[zoneIndex];
+        console.log('目标位置已有单词:', oldWord);
+        
+        // 找到被替换单词的数组索引
+        const oldWordObj = shuffledWords.find(w => w.word === oldWord);
+        const oldWordIndexInArray = oldWordObj ? shuffledWords.findIndex(w => w.originalIndex === oldWordObj.originalIndex) : -1;
+        
+        // 更新被替换单词的状态为 available
+        if (oldWordIndexInArray !== -1) {
+          setWordStatuses(prevStatuses => {
+            const newStatuses = [...prevStatuses];
+            newStatuses[oldWordIndexInArray] = 'available';
+            console.log('清除被替换单词状态，数组索引:', oldWordIndexInArray);
+            return newStatuses;
+          });
+        }
+      }
+      
+      // 放置单词到目标位置
       newAnswer[zoneIndex] = word;
+      console.log('新的答案:', newAnswer);
       return newAnswer;
     });
     
-    // 更新单词状态
+    // 更新当前单词状态为 placed
     setWordStatuses(prev => {
       const newStatuses = [...prev];
-      newStatuses[wordIndex] = 'placed';
+      newStatuses[wordIndexInArray] = 'placed';
+      console.log('设置单词状态为 placed，数组索引:', wordIndexInArray);
       return newStatuses;
     });
     
@@ -62,35 +104,46 @@ const WordSlide = ({
         onAnswerChange(slideIndex, updatedAnswer.filter(w => w !== null));
       }, 0);
     }
-  }, [isSubmitted, onAnswerChange, slideIndex, userAnswer]);
+  }, [isSubmitted, onAnswerChange, slideIndex, userAnswer, shuffledWords]);
 
   // 重置单词（双击）
   const handleResetWord = useCallback((wordIndex) => {
     if (isSubmitted) return;
     
     const wordToReset = shuffledWords[wordIndex].word;
+    console.log('双击重置单词:', wordToReset, '索引:', wordIndex);
     
     // 找到这个单词在答案中的位置
-    const answerIndex = userAnswer.findIndex(w => w === wordToReset);
+    const answerIndex = userAnswer.findIndex(w => {
+      if (!w) return false;
+      const wordObj = shuffledWords.find(ww => ww.word === w);
+      return wordObj && wordObj.originalIndex === wordIndex;
+    });
+    
+    console.log('找到答案位置:', answerIndex);
     
     if (answerIndex !== -1) {
+      // 清除答案
       setUserAnswer(prev => {
         const newAnswer = [...prev];
         newAnswer[answerIndex] = null;
+        console.log('清除后的答案:', newAnswer);
         return newAnswer;
       });
       
+      // 更新状态为可用
       setWordStatuses(prev => {
         const newStatuses = [...prev];
         newStatuses[wordIndex] = 'available';
+        console.log('清除后的状态:', newStatuses);
         return newStatuses;
       });
       
       // 通知父组件
       if (onResetWord) {
         setTimeout(() => {
-          const updatedAnswer = userAnswer.filter((w, idx) => idx !== answerIndex);
-          onResetWord(slideIndex, updatedAnswer.filter(w => w !== null));
+          const updatedAnswer = userAnswer.filter(w => w !== null);
+          onResetWord(slideIndex, updatedAnswer);
         }, 0);
       }
     }
@@ -104,8 +157,9 @@ const WordSlide = ({
           <DraggableWord
             key={`available-${index}`}
             word={item.word}
-            index={index}
+            originalIndex={item.originalIndex}
             status="available"
+            onDrop={handleWordPlace}
           />
         );
       }
@@ -113,7 +167,7 @@ const WordSlide = ({
     });
   };
 
-  // 渲染已放置的单词（可以拖拽返回）
+  // 渲染已放置的单词（可以拖动到新位置）
   const renderPlacedWords = () => {
     return shuffledWords.map((item, index) => {
       if (wordStatuses[index] === 'placed') {
@@ -121,9 +175,9 @@ const WordSlide = ({
           <DraggableWord
             key={`placed-${index}`}
             word={item.word}
-            index={index}
+            originalIndex={item.originalIndex}
             status="placed"
-            onReset={handleResetWord}
+            onDrop={handleWordPlace}  // 使用同一个放置处理函数
           />
         );
       }
