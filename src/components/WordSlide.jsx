@@ -99,14 +99,24 @@ const WordSlide = ({
     
     // 添加到答案区
     const newAnswer = [...userAnswer, word];
-    setUserAnswer(newAnswer);
     
     // 更新单词状态
-    setWordStatuses(prev => {
-      const newStatuses = [...prev];
-      newStatuses[wordIndexInShuffled] = 'placed';
-      return newStatuses;
-    });
+    const newStatuses = [...wordStatuses];
+    newStatuses[wordIndexInShuffled] = 'placed';
+    
+    // 检查是否只剩最后一个空位，如果是则自动填充最后一个单词
+    if (newAnswer.length === shuffledWords.length - 1) {
+      // 找到最后一个可用的单词
+      const lastAvailableIndex = newStatuses.findIndex(status => status === 'available');
+      if (lastAvailableIndex !== -1) {
+        const lastWord = shuffledWords[lastAvailableIndex].word;
+        newAnswer.push(lastWord);
+        newStatuses[lastAvailableIndex] = 'placed';
+      }
+    }
+    
+    setUserAnswer(newAnswer);
+    setWordStatuses(newStatuses);
     
     // 通知父组件
     if (onAnswerChange) {
