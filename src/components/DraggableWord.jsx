@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 /**
  * 可拖拽的单词组件（使用鼠标事件模拟拖拽）
  */
-const DraggableWord = ({ word, originalIndex, status = 'available', onDrop }) => {
+const DraggableWord = ({ word, originalIndex, status = 'available', onDrop, onCancel }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const elementRef = React.useRef(null);
@@ -27,6 +27,8 @@ const DraggableWord = ({ word, originalIndex, status = 'available', onDrop }) =>
       x: e.clientX - dragOffsetRef.current.x,
       y: e.clientY - dragOffsetRef.current.y
     });
+    
+    console.log('开始拖动单词:', word, '状态:', status);
   };
 
   const handleMouseMove = React.useCallback((e) => {
@@ -76,7 +78,13 @@ const DraggableWord = ({ word, originalIndex, status = 'available', onDrop }) =>
     }
     
     console.log('未放置在任何 DropZone 上');
-  }, [isDragging, word, originalIndex, onDrop]);
+    
+    // 如果是已放置的单词且没有放到任何 DropZone 上，则取消放置
+    if (status === 'placed' && onCancel) {
+      console.log('取消放置单词:', word, '索引:', originalIndex);
+      onCancel(originalIndex);
+    }
+  }, [isDragging, word, originalIndex, status, onDrop, onCancel]);
 
   // 添加全局鼠标事件监听
   useEffect(() => {

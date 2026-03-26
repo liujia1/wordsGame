@@ -24,6 +24,40 @@ export const shuffleArray = (array) => {
 };
 
 /**
+ * 基于种子的确定性洗牌（同一个种子产生相同的洗牌结果）
+ * @param {array} array - 要打乱的数组
+ * @param {string} seed - 种子字符串
+ * @returns {array} 打乱后的新数组
+ */
+export const seededShuffle = (array, seed) => {
+  const newArray = [...array];
+  
+  const hashCode = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash);
+  };
+  
+  const seedNum = hashCode(seed);
+  let currentSeed = seedNum;
+  const random = () => {
+    currentSeed = (currentSeed * 9301 + 49297) % 233280;
+    return currentSeed / 233280;
+  };
+  
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  
+  return newArray;
+};
+
+/**
  * 从句子列表中随机抽取指定数量的句子（有放回抽样）
  * @param {string[]} sentences - 句子列表
  * @param {number} count - 抽取数量，默认 10

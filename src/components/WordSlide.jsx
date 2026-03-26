@@ -1,7 +1,44 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import DraggableWord from './DraggableWord';
-import DropZone from './DropZone';
-import { splitSentence, shuffleArray } from '../utils/gameHelpers';
+import { splitSentence, seededShuffle } from '../utils/gameHelpers';
+
+/**
+ * 单词卡片组件（点击式）
+ */
+const WordCard = ({ word, status, onClick, disabled }) => {
+  const baseClasses = "px-4 py-2 rounded-lg text-lg font-medium cursor-pointer transition-all duration-200 select-none";
+  
+  const statusClasses = {
+    available: "bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400 hover:bg-blue-50 shadow-sm",
+    placed: "bg-blue-500 border-2 border-blue-600 text-white shadow-md",
+  };
+  
+  const disabledClasses = "opacity-50 cursor-not-allowed";
+  
+  const className = `${baseClasses} ${statusClasses[status]} ${disabled ? disabledClasses : ""}`;
+  
+  return (
+    <div
+      className={className}
+      onClick={disabled ? null : onClick}
+    >
+      {word}
+    </div>
+  );
+};
+
+/**
+ * 答案区单词卡片组件
+ */
+const AnswerCard = ({ word, onClick, disabled }) => {
+  return (
+    <div
+      className={`px-4 py-2 rounded-lg text-lg font-medium cursor-pointer transition-all duration-200 select-none bg-blue-500 border-2 border-blue-600 text-white shadow-md hover:bg-blue-600 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      onClick={disabled ? null : onClick}
+    >
+      {word}
+    </div>
+  );
+};
 
 /**
  * 单词幻灯片组件（单个游戏）
@@ -12,212 +49,175 @@ const WordSlide = ({
   isSubmitted = false, 
   isCorrect = false,
   onAnswerChange,
-  onResetWord 
+  initialAnswer = null 
 }) => {
   // 将句子拆分为单词
   const words = splitSentence(sentence);
   
-  // 打乱单词顺序（只在初始化时）
-  const [shuffledWords] = useState(() => shuffleArray(words.map((w, i) => ({ word: w, originalIndex: i }))));
+  // 使用句子内容作为种子进行确定性洗牌（确保同一个题目每次洗牌结果相同）
+  const [shuffledWords] = useState(() => 
+    seededShuffle(words.map((w, i) => ({ word: w, originalIndex: i })), sentence)
+  );
   
-  // 用户的答案
-  const [userAnswer, setUserAnswer] = useState(Array(words.length).fill(null));
+  // 用户的答案（按顺序放置）
+  const [userAnswer, setUserAnswer] = useState([]);
   
-  // 单词状态：'available'(可用), 'placed'(已放置), 'disabled'(禁用)
+  // 单词状态：'available'(可用), 'placed'(已放置)
   const [wordStatuses, setWordStatuses] = useState(
     shuffledWords.map(() => 'available')
   );
 
-  // 处理放置单词
-  const handleWordPlace = useCallback((zoneIndex, word, originalIndex) => {
+  // 当 initialAnswer 变化时，恢复答案
+  useEffect(() => {
+    if (initialAnswer && initialAnswer.length > 0) {
+      setUserAnswer(initialAnswer);
+      
+      // 更新单词状态
+      const newStatuses = shuffledWords.map(() => 'available');
+      initialAnswer.forEach(word => {
+        const wordIndex = shuffledWords.findIndex(w => w.word === word);
+        if (wordIndex !== -1) {
+          newStatuses[wordIndex] = 'placed';
+        }
+      });
+      setWordStatuses(newStatuses);
+    } else {
+      setUserAnswer([]);
+      setWordStatuses(shuffledWords.map(() => 'available'));
+    }
+  }, [initialAnswer, shuffledWords]);
+
+  // 点击单词卡片 -> 放入答案区
+  const handleWordClick = useCallback((word, originalIndex) => {
     if (isSubmitted) return;
     
-    console.log('放置单词 - Zone:', zoneIndex, '单词:', word, '原索引:', originalIndex);
-    
-    // 找到这个单词在 shuffledWords 中的实际索引
-    const wordIndexInArray = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
-    
-    if (wordIndexInArray === -1) {
-      console.log('找不到单词对象');
+    // 检查是否已经放置
+    const wordIndexInShuffled = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
+    if (wordIndexInShuffled === -1 || wordStatuses[wordIndexInShuffled] === 'placed') {
       return;
     }
     
-    console.log('单词在数组中的索引:', wordIndexInArray);
+    // 添加到答案区
+    const newAnswer = [...userAnswer, word];
+    setUserAnswer(newAnswer);
     
-    // 检查这个单词是否已经被放置在某个位置
-    const existingZoneIndex = userAnswer.findIndex(w => {
-      if (!w) return false;
-      const existingWordObj = shuffledWords.find(ww => ww.word === w);
-      return existingWordObj && existingWordObj.originalIndex === originalIndex;
-    });
-    
-    console.log('单词当前在位置:', existingZoneIndex);
-    
-    // 使用单次状态更新来完成所有操作
-    setUserAnswer(prev => {
-      const newAnswer = [...prev];
-      
-      // 如果单词已经在其他位置，先清除那个位置
-      if (existingZoneIndex !== -1 && existingZoneIndex !== zoneIndex) {
-        console.log('清除原位置:', existingZoneIndex);
-        newAnswer[existingZoneIndex] = null;
-      }
-      
-      // 检查目标位置是否已经有其他单词
-      if (newAnswer[zoneIndex] !== null && newAnswer[zoneIndex] !== word) {
-        const oldWord = newAnswer[zoneIndex];
-        console.log('目标位置已有单词:', oldWord);
-        
-        // 找到被替换单词的数组索引
-        const oldWordObj = shuffledWords.find(w => w.word === oldWord);
-        const oldWordIndexInArray = oldWordObj ? shuffledWords.findIndex(w => w.originalIndex === oldWordObj.originalIndex) : -1;
-        
-        // 更新被替换单词的状态为 available
-        if (oldWordIndexInArray !== -1) {
-          setWordStatuses(prevStatuses => {
-            const newStatuses = [...prevStatuses];
-            newStatuses[oldWordIndexInArray] = 'available';
-            console.log('清除被替换单词状态，数组索引:', oldWordIndexInArray);
-            return newStatuses;
-          });
-        }
-      }
-      
-      // 放置单词到目标位置
-      newAnswer[zoneIndex] = word;
-      console.log('新的答案:', newAnswer);
-      return newAnswer;
-    });
-    
-    // 更新当前单词状态为 placed
+    // 更新单词状态
     setWordStatuses(prev => {
       const newStatuses = [...prev];
-      newStatuses[wordIndexInArray] = 'placed';
-      console.log('设置单词状态为 placed，数组索引:', wordIndexInArray);
+      newStatuses[wordIndexInShuffled] = 'placed';
       return newStatuses;
     });
     
-    // 通知父组件答案变化
+    // 通知父组件
     if (onAnswerChange) {
-      setTimeout(() => {
-        const updatedAnswer = userAnswer.map((w, idx) => idx === zoneIndex ? word : w);
-        onAnswerChange(slideIndex, updatedAnswer.filter(w => w !== null));
-      }, 0);
+      onAnswerChange(slideIndex, newAnswer);
+    }
+  }, [isSubmitted, onAnswerChange, slideIndex, userAnswer, shuffledWords, wordStatuses]);
+
+  // 点击答案区的单词 -> 移除
+  const handleAnswerClick = useCallback((index) => {
+    if (isSubmitted) return;
+    
+    const word = userAnswer[index];
+    
+    // 找到这个单词在 shuffledWords 中的索引
+    const wordIndexInShuffled = shuffledWords.findIndex(w => w.word === word);
+    
+    // 从答案区移除
+    const newAnswer = userAnswer.filter((_, i) => i !== index);
+    setUserAnswer(newAnswer);
+    
+    // 更新单词状态
+    if (wordIndexInShuffled !== -1) {
+      setWordStatuses(prev => {
+        const newStatuses = [...prev];
+        newStatuses[wordIndexInShuffled] = 'available';
+        return newStatuses;
+      });
+    }
+    
+    // 通知父组件
+    if (onAnswerChange) {
+      onAnswerChange(slideIndex, newAnswer);
     }
   }, [isSubmitted, onAnswerChange, slideIndex, userAnswer, shuffledWords]);
 
-  // 重置单词（双击）
-  const handleResetWord = useCallback((wordIndex) => {
+  // 重置答案区
+  const handleReset = useCallback(() => {
     if (isSubmitted) return;
     
-    const wordToReset = shuffledWords[wordIndex].word;
-    console.log('双击重置单词:', wordToReset, '索引:', wordIndex);
+    setUserAnswer([]);
+    setWordStatuses(shuffledWords.map(() => 'available'));
     
-    // 找到这个单词在答案中的位置
-    const answerIndex = userAnswer.findIndex(w => {
-      if (!w) return false;
-      const wordObj = shuffledWords.find(ww => ww.word === w);
-      return wordObj && wordObj.originalIndex === wordIndex;
-    });
-    
-    console.log('找到答案位置:', answerIndex);
-    
-    if (answerIndex !== -1) {
-      // 清除答案
-      setUserAnswer(prev => {
-        const newAnswer = [...prev];
-        newAnswer[answerIndex] = null;
-        console.log('清除后的答案:', newAnswer);
-        return newAnswer;
-      });
-      
-      // 更新状态为可用
-      setWordStatuses(prev => {
-        const newStatuses = [...prev];
-        newStatuses[wordIndex] = 'available';
-        console.log('清除后的状态:', newStatuses);
-        return newStatuses;
-      });
-      
-      // 通知父组件
-      if (onResetWord) {
-        setTimeout(() => {
-          const updatedAnswer = userAnswer.filter(w => w !== null);
-          onResetWord(slideIndex, updatedAnswer);
-        }, 0);
-      }
+    // 通知父组件
+    if (onAnswerChange) {
+      onAnswerChange(slideIndex, []);
     }
-  }, [isSubmitted, onResetWord, slideIndex, shuffledWords, userAnswer]);
+  }, [isSubmitted, onAnswerChange, slideIndex, shuffledWords]);
 
-  // 渲染可用的单词（未被放置的）
-  const renderAvailableWords = () => {
-    return shuffledWords.map((item, index) => {
-      if (wordStatuses[index] === 'available') {
-        return (
-          <DraggableWord
-            key={`available-${index}`}
-            word={item.word}
-            originalIndex={item.originalIndex}
-            status="available"
-            onDrop={handleWordPlace}
-          />
-        );
-      }
-      return null;
-    });
-  };
-
-  // 渲染已放置的单词（可以拖动到新位置）
-  const renderPlacedWords = () => {
-    return shuffledWords.map((item, index) => {
-      if (wordStatuses[index] === 'placed') {
-        return (
-          <DraggableWord
-            key={`placed-${index}`}
-            word={item.word}
-            originalIndex={item.originalIndex}
-            status="placed"
-            onDrop={handleWordPlace}  // 使用同一个放置处理函数
-          />
-        );
-      }
-      return null;
-    });
-  };
-
-  // 渲染横线区域
-  const renderDropZones = () => {
-    return words.map((_, index) => (
-      <DropZone
-        key={`zone-${index}`}
-        index={index}
-        acceptedWord={userAnswer[index]}
-        onWordPlace={handleWordPlace}
-        isSubmitted={isSubmitted}
+  // 渲染单词区的单词
+  const renderWords = () => {
+    return shuffledWords.map((item, index) => (
+      <WordCard
+        key={`word-${index}`}
+        word={item.word}
+        status={wordStatuses[index]}
+        onClick={() => handleWordClick(item.word, item.originalIndex)}
+        disabled={isSubmitted}
       />
     ));
   };
 
+  // 渲染答案区
+  const renderAnswer = () => {
+    const elements = [];
+    
+    // 使用 shuffledWords 的长度，因为这才是实际的单词数量
+    for (let i = 0; i < shuffledWords.length; i++) {
+      if (i < userAnswer.length) {
+        elements.push(
+          <AnswerCard
+            key={`answer-${i}`}
+            word={userAnswer[i]}
+            onClick={() => handleAnswerClick(i)}
+            disabled={isSubmitted}
+          />
+        );
+      } else {
+        elements.push(
+          <div
+            key={`slot-${i}`}
+            className="w-16 h-10 border-b-2 border-gray-400 flex items-center justify-center"
+          />
+        );
+      }
+    }
+    
+    return elements;
+  };
+
   return (
     <div className="flex flex-col h-full p-6">
-      {/* 上部：散乱的单词区 */}
-      <div className="flex-none mb-4">
-        <h3 className="text-xl font-bold text-gray-600 mb-4 text-center">
-          拖动下面的单词到横线上
-        </h3>
-        <div className="flex flex-wrap justify-center items-center min-h-[100px] bg-white rounded-xl p-4 shadow-inner">
-          {renderAvailableWords()}
-          {renderPlacedWords()}
+      {/* 上部：答案放置区 */}
+      <div className="flex-1 overflow-auto mb-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-gray-600 text-center flex-1">
+            你的答案
+          </h3>
+          <button
+            onClick={handleReset}
+            disabled={isSubmitted}
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              isSubmitted 
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                : 'bg-orange-500 text-white hover:bg-orange-600 shadow-md'
+            }`}
+          >
+            🔄 重新开始
+          </button>
         </div>
-      </div>
-      
-      {/* 下部：横线放置区 */}
-      <div className="flex-1 overflow-auto">
-        <h3 className="text-xl font-bold text-gray-600 mb-4 text-center">
-          组成完整的句子
-        </h3>
-        <div className="flex flex-wrap justify-center items-center min-h-[120px] bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          {renderDropZones()}
+        <div className="flex flex-wrap justify-center items-center min-h-[120px] bg-blue-50 rounded-xl p-4 border-2 border-blue-200 gap-3">
+          {renderAnswer()}
         </div>
         
         {/* 提交后显示反馈 */}
@@ -237,6 +237,16 @@ const WordSlide = ({
             )}
           </div>
         )}
+      </div>
+      
+      {/* 下部：散乱的单词区 */}
+      <div className="flex-none">
+        <h3 className="text-xl font-bold text-gray-600 mb-4 text-center">
+          点击下面的单词按顺序组成句子
+        </h3>
+        <div className="flex flex-wrap justify-center items-center min-h-[100px] bg-white rounded-xl p-4 shadow-inner gap-2">
+          {renderWords()}
+        </div>
       </div>
     </div>
   );

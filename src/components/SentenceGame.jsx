@@ -101,12 +101,18 @@ const SentenceGame = () => {
     setScore(newScore);
   };
 
-  // 重新开始
+  // 重新开始（直接重置游戏，不跳转到开始界面）
   const handleRestart = () => {
-    setGameStarted(false);
-    setTimeout(() => {
-      startGame();
-    }, 100);
+    if (sentences.length === 0) return;
+    
+    // 随机抽取 10 题（有放回）
+    const selectedQuestions = selectQuestions(sentences, 10);
+    setQuestions(selectedQuestions);
+    setUserAnswers({});
+    setSubmitted({});
+    setScore(0);
+    setCurrentSlide(0);
+    // 保持 gameStarted 为 true，不跳转到开始界面
   };
 
   // 切换到指定题目
@@ -114,46 +120,10 @@ const SentenceGame = () => {
     setCurrentSlide(index);
   };
 
-  // 渲染分数显示
-  const renderScore = () => {
-    const totalQuestions = questions.length;
-    const answeredCount = Object.keys(userAnswers).filter(
-      key => userAnswers[key] && userAnswers[key].length > 0
-    ).length;
-
-    return (
-      <div className="bg-gradient-to-r from-primary to-secondary text-white p-4 shadow-lg">
-        <div className="container mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold">🎮 单词组合句子游戏</h1>
-            <p className="text-sm mt-1">
-              进度：{answeredCount} / {totalQuestions}
-            </p>
-          </div>
-          
-          {gameStarted && (
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <p className="text-sm opacity-90">得分</p>
-                <p className="text-3xl font-bold">{score} / 100</p>
-              </div>
-              <button
-                onClick={handleRestart}
-                className="bg-white text-primary px-4 py-2 rounded-lg font-bold hover:bg-yellow-100 transition-colors shadow-md"
-              >
-                🔄 再来一次
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
   // 渲染开始界面
   const renderStartScreen = () => {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl m-8 p-8">
+      <div className="flex flex-col items-center justify-center min-h-[90vh] bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl m-4 p-8">
         <h2 className="text-5xl font-bold text-gray-700 mb-4">
           🎓 英语句子练习
         </h2>
@@ -226,12 +196,13 @@ const SentenceGame = () => {
         {/* 当前题目幻灯片 */}
         <div className="flex-1 p-4 bg-white">
           <WordSlide
-            key={currentSlide}
+            key={questions[currentSlide]}
             sentence={questions[currentSlide]}
             slideIndex={currentSlide}
             isSubmitted={submitted[currentSlide]?.submitted || false}
             isCorrect={submitted[currentSlide]?.correct || false}
             onAnswerChange={handleAnswerChange}
+            initialAnswer={userAnswers[currentSlide] || null}
           />
         </div>
 
@@ -257,41 +228,33 @@ const SentenceGame = () => {
           ))}
         </div>
 
-        {/* 提交按钮 */}
-        {!Object.values(submitted).some(s => s.submitted) && (
-          <div className="p-4 flex justify-center">
+        {/* 提交按钮和重新开始按钮 */}
+        <div className="p-4 flex justify-center gap-4">
+          {!Object.values(submitted).some(s => s.submitted) && (
             <button
               onClick={handleSubmit}
               className="bg-success hover:bg-green-400 text-white text-xl font-bold px-16 py-4 rounded-full shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
-              disabled={Object.keys(userAnswers).length === 0}
+              disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
             >
               ✅ 提交答案
             </button>
-          </div>
-        )}
-
-        {/* 提交后显示最终分数和提示 */}
+          )}
+          
+          <button
+            onClick={handleRestart}
+            className="bg-primary hover:bg-red-500 text-white font-bold px-8 py-4 rounded-lg shadow-md transition-colors"
+          >
+            🔄 再来一次
+          </button>
+        </div>
+        
+        {/* 提交后显示最终分数 */}
         {Object.values(submitted).some(s => s.submitted) && (
           <div className="p-4 flex justify-center">
-            <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-              <p className="text-3xl font-bold text-primary mb-2">
+            <div className="bg-white rounded-xl px-6 py-3 shadow-lg text-center">
+              <p className="text-2xl font-bold text-primary">
                 🏆 最终得分：{score} / 100
               </p>
-              <p className="text-gray-600 mb-4">
-                {score === 100 
-                  ? '太棒了！全对！🎉' 
-                  : score >= 80 
-                  ? '很不错！继续加油！💪' 
-                  : score >= 60 
-                  ? '及格了！还需要努力哦~📚' 
-                  : '多多练习，你会更棒的！✨'}
-              </p>
-              <button
-                onClick={handleRestart}
-                className="bg-primary hover:bg-red-500 text-white font-bold px-8 py-3 rounded-lg shadow-md transition-colors"
-              >
-                🔄 再做一次
-              </button>
             </div>
           </div>
         )}
@@ -300,9 +263,7 @@ const SentenceGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200">
-      {renderScore()}
-      
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200 pt-4">
       <div className="container mx-auto pb-4">
         {!gameStarted ? renderStartScreen() : renderGame()}
       </div>
