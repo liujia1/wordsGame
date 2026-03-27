@@ -50,7 +50,10 @@ const WordSlide = ({
   isCorrect = false,
   onAnswerChange,
   initialAnswer = null,
-  onRestartGame
+  onRestartGame,
+  onNextQuestion,
+  autoSwitch = false,
+  onAutoSwitchChange
 }) => {
   // 将句子拆分为单词
   const words = splitSentence(sentence);
@@ -67,6 +70,19 @@ const WordSlide = ({
   const [wordStatuses, setWordStatuses] = useState(
     shuffledWords.map(() => 'available')
   );
+
+  // 当答案变化时，检查是否填满且开启了自动切换
+  useEffect(() => {
+    if (autoSwitch && userAnswer.length === words.length && userAnswer.length > 0) {
+      // 延迟 500ms 切换，让用户看到最后一个单词被放置
+      const timer = setTimeout(() => {
+        if (onNextQuestion) {
+          onNextQuestion();
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [userAnswer, words.length, autoSwitch, onNextQuestion]);
 
   // 当 initialAnswer 变化时，恢复答案
   useEffect(() => {
@@ -282,9 +298,33 @@ const WordSlide = ({
       
       {/* 下部：散乱的单词区 */}
       <div className="flex-none">
-        <h3 className="text-xl font-bold text-gray-600 mb-4 text-center">
-          点击下面的单词按顺序组成句子
-        </h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-gray-600 text-center">
+            点击下面的单词按顺序组成句子
+          </h3>
+          <div className="flex items-center gap-2">
+            <label className="flex items-center cursor-pointer">
+              <div className="relative">
+                <input 
+                  type="checkbox" 
+                  className="sr-only" 
+                  checked={autoSwitch}
+                  onChange={(e) => onAutoSwitchChange && onAutoSwitchChange(e.target.checked)}
+                  disabled={isSubmitted}
+                />
+                <div className={`block w-14 h-8 rounded-full transition-colors ${
+                  autoSwitch ? 'bg-blue-500' : 'bg-gray-300'
+                } ${isSubmitted ? 'opacity-50' : ''}`}></div>
+                <div className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${
+                  autoSwitch ? 'transform translate-x-6' : ''
+                }`}></div>
+              </div>
+              <span className="ml-2 text-sm font-medium text-gray-600">
+                自动切换
+              </span>
+            </label>
+          </div>
+        </div>
         <div className="flex flex-wrap justify-center items-center min-h-[100px] bg-white rounded-xl p-4 shadow-inner gap-2">
           {renderWords()}
         </div>

@@ -19,6 +19,7 @@ const SentenceGame = () => {
   const [showEncouragement, setShowEncouragement] = useState(false);
   const [comboCount, setComboCount] = useState(0); // 连击次数
   const [showComboEffect, setShowComboEffect] = useState(false); // 显示连击特效
+  const [autoSwitch, setAutoSwitch] = useState(false); // 自动切换开关（全局状态）
 
   // 读取句子文件
   useEffect(() => {
@@ -100,7 +101,12 @@ const SentenceGame = () => {
       const baseFreq = 523.25; // C5
       const intervals = [];
       
-      if (comboLevel >= 10) {
+      if (comboLevel === 1) {
+        // First Blood：简单的胜利音效
+        intervals.push([0, baseFreq]);
+        intervals.push([0.15, baseFreq * 1.25]);
+        intervals.push([0.3, baseFreq * 1.5]);
+      } else if (comboLevel >= 10) {
         // 10 连击：华丽的 ascending arpeggio
         intervals.push([0, baseFreq]);
         intervals.push([0.1, baseFreq * 1.25]);
@@ -151,7 +157,9 @@ const SentenceGame = () => {
         let text = '';
         let lang = 'en-US'; // 使用英文语音
         
-        if (comboLevel === 2) {
+        if (comboLevel === 1) {
+          text = 'First Blood!';
+        } else if (comboLevel === 2) {
           text = 'Double Kill!';
         } else if (comboLevel === 3) {
           text = 'Triple Kill!';
@@ -159,12 +167,16 @@ const SentenceGame = () => {
           text = 'Quadra Kill!';
         } else if (comboLevel === 5) {
           text = 'Penta Kill!';
+        } else if (comboLevel === 6) {
+          text = 'Killing Spree!';
+        } else if (comboLevel === 7) {
+          text = 'Rampage!';
+        } else if (comboLevel === 8) {
+          text = 'Unstoppable!';
+        } else if (comboLevel === 9) {
+          text = 'Godlike!';
         } else if (comboLevel >= 10) {
           text = 'Legendary!';
-        } else if (comboLevel > 5) {
-          text = `${comboLevel} Kill Streak!`;
-        } else {
-          text = `${comboLevel} Kill Streak!`;
         }
         
         const utterance = new SpeechSynthesisUtterance(text);
@@ -294,16 +306,10 @@ const SentenceGame = () => {
         const newCombo = prev + 1;
         console.log('连击数:', newCombo);
               
-        // 达到连击里程碑时触发特殊效果（从 2 连击开始）
-        if (newCombo >= 2) {
-          setShowComboEffect(true);
+        // 第一次满分或达到连击里程碑时触发语音（不显示特效文字）
+        if (newCombo >= 1) {
           playComboSound(newCombo);
           speakCombo(newCombo);
-                
-          // 3 秒后隐藏连击特效
-          setTimeout(() => {
-            setShowComboEffect(false);
-          }, 3000);
         }
               
         return newCombo;
@@ -355,6 +361,7 @@ const SentenceGame = () => {
     setShowEncouragement(false);
     // 保持 gameStarted 为 true，不跳转到开始界面
     // 注意：不重置 comboCount，保持连击记录
+    // 注意：不重置 autoSwitch，保持自动切换开关状态
   };
 
   // 切换到指定题目
@@ -370,15 +377,20 @@ const SentenceGame = () => {
       if (combo === 4) return 'from-green-400 via-cyan-500 to-blue-500';
       if (combo === 3) return 'from-blue-400 via-green-500 to-cyan-500';
       if (combo === 2) return 'from-orange-400 to-red-500';
-      return 'from-blue-400 via-cyan-500 to-green-500';
+      return 'from-red-400 via-orange-500 to-yellow-500';
     };
     
     const getComboText = () => {
       if (combo >= 10) return '🔥 LEGENDARY! 🔥';
+      if (combo === 9) return '⚡ GODLIKE! ⚡';
+      if (combo === 8) return '💥 UNSTOPPABLE! 💥';
+      if (combo === 7) return '🌪️ RAMPAGE! 🌪️';
+      if (combo === 6) return '🔥 KILLING SPREE! 🔥';
       if (combo === 5) return '🔥 PENTA KILL! 🔥🔥';
       if (combo === 4) return '🔥 QUADRA KILL! 🔥';
       if (combo === 3) return '🔥 TRIPLE KILL! 🔥';
       if (combo === 2) return '⚡ DOUBLE KILL! ⚡';
+      if (combo === 1) return '🩸 FIRST BLOOD! 🩸';
       return `${combo} KILL STREAK!`;
     };
     
@@ -451,8 +463,8 @@ const SentenceGame = () => {
           <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 drop-shadow-lg">
             满分！
           </div>
-          <div className="text-4xl font-bold text-white mt-4 drop-shadow-lg">
-            100分！太棒了！
+          <div className="text-4xl font-bold text-red-600 mt-4 drop-shadow-lg">
+            100 分！太棒了！
           </div>
           <div className="text-2xl text-yellow-300 mt-2 drop-shadow-lg">
             ⭐⭐⭐⭐⭐
@@ -541,6 +553,9 @@ const SentenceGame = () => {
             onAnswerChange={handleAnswerChange}
             initialAnswer={userAnswers[currentSlide] || null}
             onRestartGame={handleRestart}
+            onNextQuestion={goToNext}
+            autoSwitch={autoSwitch}
+            onAutoSwitchChange={setAutoSwitch}
           />
         </div>
 
@@ -569,12 +584,12 @@ const SentenceGame = () => {
         </div>
 
         {/* 题目切换按钮和提交按钮 - 移到底部 */}
-        <div className="flex justify-between items-center p-4 bg-white border-t">
+        <div className="flex flex-wrap justify-between items-center p-4 bg-white border-t gap-2">
           <button
             onClick={goToPrevious}
             disabled={currentSlide === 0}
             className={`
-              px-6 py-3 rounded-lg font-bold text-lg transition-all
+              px-6 py-3 rounded-lg font-bold text-lg transition-all flex-shrink-0
               ${currentSlide === 0 
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
                 : 'bg-primary text-white hover:bg-red-500 hover:scale-105'}
@@ -583,48 +598,53 @@ const SentenceGame = () => {
             ⬅️ 上一题
           </button>
           
-          <div className="text-center flex flex-col items-center">
-            <p className="text-lg font-bold text-gray-700">
-              第 {currentSlide + 1} / {questions.length} 题
-            </p>
-            {/* 提交后显示得分 */}
-            {Object.values(submitted).some(s => s.submitted) && (
-              <div className={`
-                mt-1 px-3 py-1 rounded-full text-sm font-bold transition-all
-                ${isPerfectScore 
-                  ? 'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white' 
-                  : 'bg-gray-100 text-primary'}
-              `}>
-                {isPerfectScore ? '🏆' : ''} 得分：{score} / 100 {isPerfectScore ? '🏆' : ''}
-              </div>
-            )}
-            {/* 显示连击数 */}
-            {comboCount >= 2 && (
-              <div className="mt-1 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-400 to-red-500 text-white animate-pulse">
-                🔥 {comboCount === 2 ? 'DOUBLE' : comboCount === 3 ? 'TRIPLE' : comboCount === 4 ? 'QUADRA' : comboCount === 5 ? 'PENTA' : comboCount >= 10 ? 'LEGENDARY' : `${comboCount}`} KILL STREAK
-              </div>
-            )}
+          {/* 中间内容：窄屏时换行到下方居中，宽屏时绝对定位居中 */}
+          <div className="w-full flex justify-center order-first md:order-none md:w-auto md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
+            <div className="flex flex-col items-center">
+              <p className="text-lg font-bold text-gray-700">
+                第 {currentSlide + 1} / {questions.length} 题
+              </p>
+              {/* 提交后显示得分 */}
+              {Object.values(submitted).some(s => s.submitted) && (
+                <div className={`
+                  mt-1 px-3 py-1 rounded-full text-sm font-bold transition-all
+                  ${isPerfectScore 
+                    ? 'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white' 
+                    : 'bg-gray-100 text-primary'}
+                `}>
+                  {isPerfectScore ? '' : ''} 得分：{score} / 100 {isPerfectScore ? '' : ''}
+                </div>
+              )}
+              {/* 显示连击数 */}
+              {comboCount >= 1 && (
+                <div className="mt-1 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 text-white animate-pulse">
+                  {comboCount === 1 ? '🩸 FIRST BLOOD!' : comboCount === 2 ? '⚡ DOUBLE KILL!' : comboCount === 3 ? '🔥 TRIPLE KILL!' : comboCount === 4 ? '🔥 QUADRA KILL!' : comboCount === 5 ? '🔥 PENTA KILL!' : comboCount === 6 ? '🔥 KILLING SPREE!' : comboCount === 7 ? '🌪️ RAMPAGE!' : comboCount === 8 ? '💥 UNSTOPPABLE!' : comboCount === 9 ? '⚡ GODLIKE!' : comboCount >= 10 ? '🔥 LEGENDARY!' : `${comboCount} KILL STREAK`}
+                </div>
+              )}
+            </div>
           </div>
           
           {/* 如果不是最后一题，显示下一题按钮；如果是最后一题且未提交，显示提交答案按钮 */}
-          {currentSlide < questions.length - 1 ? (
-            <button
-              onClick={goToNext}
-              className="px-6 py-3 rounded-lg font-bold text-lg transition-all bg-secondary text-white hover:bg-cyan-500 hover:scale-105"
-            >
-              下一题 ➡️
-            </button>
-          ) : (
-            !Object.values(submitted).some(s => s.submitted) && (
+          <div className="flex-shrink-0">
+            {currentSlide < questions.length - 1 ? (
               <button
-                onClick={handleSubmit}
-                className="bg-success hover:bg-green-400 text-white text-xl font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
+                onClick={goToNext}
+                className="px-6 py-3 rounded-lg font-bold text-lg transition-all bg-secondary text-white hover:bg-cyan-500 hover:scale-105"
               >
-                ✅ 提交答案
+                下一题 ➡️
               </button>
-            )
-          )}
+            ) : (
+              !Object.values(submitted).some(s => s.submitted) && (
+                <button
+                  onClick={handleSubmit}
+                  className="bg-success hover:bg-green-400 text-white text-xl font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
+                >
+                  ✅ 提交答案
+                </button>
+              )
+            )}
+          </div>
         </div>
       </div>
     );
