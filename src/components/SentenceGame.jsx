@@ -482,15 +482,15 @@ const SentenceGame = () => {
           🎓 英语句子练习
         </h2>
         <p className="text-xl text-gray-600 mb-8 text-center max-w-md">
-          将散乱的单词拖到横线上，组成完整的句子吧！
+          点击下面的单词按顺序组成句子！
         </p>
         
         <div className="bg-white rounded-xl p-6 shadow-lg mb-8 max-w-md">
           <h3 className="font-bold text-lg mb-3 text-gray-700">📋 游戏规则：</h3>
           <ul className="space-y-2 text-gray-600">
             <li>✅ 共有 10 道题目</li>
-            <li>✅ 拖动单词到下方横线</li>
-            <li>✅ 双击已放置的单词可以取消</li>
+            <li>✅ 点击单词放入答案区</li>
+            <li>✅ 点击答案区的单词可以移除</li>
             <li>✅ 每题 10 分，满分 100 分</li>
             <li>✅ 提交后可以看到正确答案</li>
           </ul>
