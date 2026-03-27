@@ -87,12 +87,15 @@ const WordSlide = ({
   // 当 initialAnswer 变化时，恢复答案
   useEffect(() => {
     if (initialAnswer && initialAnswer.length > 0) {
+      // 直接使用 initialAnswer（已经是对象数组）
       setUserAnswer(initialAnswer);
       
-      // 更新单词状态
+      // 更新单词状态：根据 originalIndex 精确匹配
       const newStatuses = shuffledWords.map(() => 'available');
-      initialAnswer.forEach(word => {
-        const wordIndex = shuffledWords.findIndex(w => w.word === word);
+      
+      initialAnswer.forEach(item => {
+        // 通过 originalIndex 精确找到对应的单词卡片
+        const wordIndex = shuffledWords.findIndex(w => w.originalIndex === item.originalIndex);
         if (wordIndex !== -1) {
           newStatuses[wordIndex] = 'placed';
         }
@@ -108,7 +111,7 @@ const WordSlide = ({
   const handleWordClick = useCallback((word, originalIndex) => {
     if (isSubmitted) return;
     
-    // 检查是否已经放置
+    // 检查是否已经放置（通过 originalIndex 判断）
     const wordIndexInShuffled = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
     if (wordIndexInShuffled === -1) {
       return;
@@ -116,8 +119,8 @@ const WordSlide = ({
     
     // 如果已经放置，则从答案区移除（取消选择）
     if (wordStatuses[wordIndexInShuffled] === 'placed') {
-      // 在答案区找到这个单词
-      const answerIndex = userAnswer.findIndex(w => w === word);
+      // 在答案区找到这个单词（通过 originalIndex 精确匹配）
+      const answerIndex = userAnswer.findIndex(w => w.originalIndex === originalIndex);
       if (answerIndex !== -1) {
         // 从答案区移除
         const newAnswer = userAnswer.filter((_, i) => i !== answerIndex);
@@ -136,8 +139,8 @@ const WordSlide = ({
       return;
     }
     
-    // 添加到答案区
-    const newAnswer = [...userAnswer, word];
+    // 添加到答案区（保存完整的单词信息：单词文本 + originalIndex）
+    const newAnswer = [...userAnswer, { word, originalIndex }];
     
     // 更新单词状态
     const newStatuses = [...wordStatuses];
@@ -149,7 +152,8 @@ const WordSlide = ({
       const lastAvailableIndex = newStatuses.findIndex(status => status === 'available');
       if (lastAvailableIndex !== -1) {
         const lastWord = shuffledWords[lastAvailableIndex].word;
-        newAnswer.push(lastWord);
+        const lastOriginalIndex = shuffledWords[lastAvailableIndex].originalIndex;
+        newAnswer.push({ word: lastWord, originalIndex: lastOriginalIndex });
         newStatuses[lastAvailableIndex] = 'placed';
       }
     }
@@ -167,10 +171,24 @@ const WordSlide = ({
   const handleAnswerClick = useCallback((index) => {
     if (isSubmitted) return;
     
-    const word = userAnswer[index];
+    // 安全检查：确保 index 在有效范围内
+    if (index < 0 || index >= userAnswer.length) {
+      console.error('Invalid answer index:', index);
+      return;
+    }
     
-    // 找到这个单词在 shuffledWords 中的索引
-    const wordIndexInShuffled = shuffledWords.findIndex(w => w.word === word);
+    const answerItem = userAnswer[index];
+    
+    // 安全检查：确保 answerItem 存在且有 originalIndex
+    if (!answerItem || answerItem.originalIndex === undefined) {
+      console.error('Invalid answer item at index:', index, answerItem);
+      return;
+    }
+    
+    const originalIndex = answerItem.originalIndex;
+    
+    // 找到这个单词在 shuffledWords 中的索引（通过 originalIndex 精确匹配）
+    const wordIndexInShuffled = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
     
     // 从答案区移除
     const newAnswer = userAnswer.filter((_, i) => i !== index);
@@ -227,7 +245,7 @@ const WordSlide = ({
         elements.push(
           <AnswerCard
             key={`answer-${i}`}
-            word={userAnswer[i]}
+            word={userAnswer[i].word} // 提取单词文本显示
             onClick={() => handleAnswerClick(i)}
             disabled={isSubmitted}
           />

@@ -74,19 +74,22 @@ export const selectQuestions = (sentences, count = 10) => {
 
 /**
  * 检查答案是否正确
- * @param {string[]} userAnswer - 用户提交的答案（单词数组）
+ * @param {Array<{word: string, originalIndex: number}>} userAnswer - 用户提交的答案（单词对象数组，包含 word 和 originalIndex）
  * @param {string} correctSentence - 正确的句子
  * @returns {boolean} 是否正确
  */
 export const checkAnswer = (userAnswer, correctSentence) => {
   const correctWords = splitSentence(correctSentence);
   
-  if (userAnswer.length !== correctWords.length) {
+  // 提取单词文本
+  const answerTexts = userAnswer.map(item => item.word);
+  
+  if (answerTexts.length !== correctWords.length) {
     return false;
   }
   
-  for (let i = 0; i < userAnswer.length; i++) {
-    if (userAnswer[i] !== correctWords[i]) {
+  for (let i = 0; i < answerTexts.length; i++) {
+    if (answerTexts[i] !== correctWords[i]) {
       return false;
     }
   }
