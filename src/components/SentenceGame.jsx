@@ -20,6 +20,7 @@ const SentenceGame = () => {
   const [comboCount, setComboCount] = useState(0); // 连击次数
   const [showComboEffect, setShowComboEffect] = useState(false); // 显示连击特效
   const [autoSwitch, setAutoSwitch] = useState(false); // 自动切换开关（全局状态）
+  const [modifiedSlides, setModifiedSlides] = useState({}); // 记录每道题是否有过答题操作（独立变量）
 
   // 读取句子文件
   useEffect(() => {
@@ -70,25 +71,17 @@ const SentenceGame = () => {
     setGameStarted(true);
   };
 
-  // 切换到上一题
-  const goToPrevious = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
-  // 切换到下一题
-  const goToNext = () => {
-    if (currentSlide < questions.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-
   // 处理答案变化
   const handleAnswerChange = (slideIndex, answer) => {
     setUserAnswers(prev => ({
       ...prev,
       [slideIndex]: answer,
+    }));
+    
+    // 标记这道题已经被修改过
+    setModifiedSlides(prev => ({
+      ...prev,
+      [slideIndex]: true,
     }));
   };
 
@@ -353,6 +346,7 @@ const SentenceGame = () => {
     const selectedQuestions = selectQuestions(sentences, 10);
     setQuestions(selectedQuestions);
     setUserAnswers({});
+    setModifiedSlides({}); // 重置所有题目的修改状态
     setSubmitted({});
     setScore(0);
     setCurrentSlide(0);
@@ -367,6 +361,30 @@ const SentenceGame = () => {
   // 切换到指定题目
   const goToSlide = (index) => {
     setCurrentSlide(index);
+  };
+  
+  // 切换到上一题
+  const goToPrevious = () => {
+    if (currentSlide > 0) {
+      // 切换到上一题前，将当前题目的 modified 状态重置为 false
+      setModifiedSlides(prev => ({
+        ...prev,
+        [currentSlide]: false,
+      }));
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+  
+  // 切换到下一题
+  const goToNext = () => {
+    if (currentSlide < questions.length - 1) {
+      // 切换到下一题前，将当前题目的 modified 状态重置为 false
+      setModifiedSlides(prev => ({
+        ...prev,
+        [currentSlide]: false,
+      }));
+      setCurrentSlide(currentSlide + 1);
+    }
   };
 
   // 连击特效组件
@@ -553,6 +571,7 @@ const SentenceGame = () => {
             onNextQuestion={goToNext}
             autoSwitch={autoSwitch}
             onAutoSwitchChange={setAutoSwitch}
+            hasModified={!!modifiedSlides[currentSlide]} // 传递当前题目的修改状态
           />
         </div>
 

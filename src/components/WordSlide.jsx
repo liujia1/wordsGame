@@ -53,7 +53,8 @@ const WordSlide = ({
   onRestartGame,
   onNextQuestion,
   autoSwitch = false,
-  onAutoSwitchChange
+  onAutoSwitchChange,
+  hasModified = false // 新增：这道题是否有过答题操作
 }) => {
   // 将句子拆分为单词
   const words = splitSentence(sentence);
@@ -73,7 +74,8 @@ const WordSlide = ({
 
   // 当答案变化时，检查是否填满且开启了自动切换
   useEffect(() => {
-    if (autoSwitch && userAnswer.length === words.length && userAnswer.length > 0) {
+    // 只有当自动切换开启、这道题被修改过、答案填满时才自动切换
+    if (autoSwitch && hasModified && userAnswer.length === words.length && userAnswer.length > 0) {
       // 延迟 500ms 切换，让用户看到最后一个单词被放置
       const timer = setTimeout(() => {
         if (onNextQuestion) {
@@ -82,7 +84,7 @@ const WordSlide = ({
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [userAnswer, words.length, autoSwitch, onNextQuestion]);
+  }, [userAnswer, words.length, autoSwitch, hasModified, onNextQuestion]);
 
   // 当 initialAnswer 变化时，恢复答案
   useEffect(() => {
