@@ -481,9 +481,6 @@ const SentenceGame = () => {
         <h2 className="text-5xl font-bold text-gray-700 mb-4">
           🎓 英语句子练习
         </h2>
-        <p className="text-xl text-gray-600 mb-8 text-center max-w-md">
-          点击下面的单词按顺序组成句子！
-        </p>
         
         <div className="bg-white rounded-xl p-6 shadow-lg mb-8 max-w-md">
           <h3 className="font-bold text-lg mb-3 text-gray-700">📋 游戏规则：</h3>
