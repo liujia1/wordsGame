@@ -5,10 +5,10 @@ import { splitSentence, seededShuffle } from '../utils/gameHelpers';
  * 单词卡片组件（点击式）
  */
 const WordCard = ({ word, status, onClick, disabled }) => {
-  const baseClasses = "px-4 py-2 rounded-lg text-lg font-medium cursor-pointer transition-all duration-200 select-none";
+  const baseClasses = "px-4 py-2 rounded-lg text-lg font-medium cursor-pointer transition-all duration-200 select-none card-hover";
   
   const statusClasses = {
-    available: "bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400 hover:bg-blue-50 shadow-sm",
+    available: "bg-white border-2 border-gray-300 text-gray-700 shadow-sm word-card-available",
     placed: "bg-blue-500 border-2 border-blue-600 text-white shadow-md",
   };
   
@@ -32,7 +32,7 @@ const WordCard = ({ word, status, onClick, disabled }) => {
 const AnswerCard = ({ word, onClick, disabled }) => {
   return (
     <div
-      className={`px-3 py-1.5 rounded-lg text-base font-medium cursor-pointer transition-all duration-200 select-none bg-blue-500 border-2 border-blue-600 text-white shadow-md hover:bg-blue-600 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`px-3 py-1.5 rounded-lg text-base font-medium cursor-pointer transition-all duration-200 select-none bg-blue-500 border-2 border-blue-600 text-white shadow-md answer-card card-hover ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       onClick={disabled ? null : onClick}
     >
       {word}

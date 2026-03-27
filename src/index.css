@@ -76,18 +76,32 @@ button:active {
   transform: scale(0.95);
 }
 
-/* 卡片悬停效果 */
+/* 卡片悬停效果 - 仅在大屏幕（非触摸设备）上显示 */
 .card-hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* 拖拽相关样式 */
 [draggable="true"] {
   user-select: none;
   -webkit-user-drag: element;
+}
+
+/* 单词卡片 hover 效果 - 仅在支持 hover 的设备上显示 */
+@media (hover: hover) and (pointer: fine) {
+  .word-card-available:hover {
+    border-color: #60a5fa;
+    background-color: #eff6ff;
+  }
+  
+  .answer-card:hover {
+    background-color: #2563eb;
+  }
 }
