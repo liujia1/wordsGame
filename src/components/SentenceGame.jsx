@@ -500,26 +500,6 @@ const SentenceGame = () => {
 
     return (
       <div className="flex flex-col h-[calc(100vh-80px)]">
-        {/* 提交按钮和重新开始按钮 - 移到顶部 */}
-        <div className="p-4 flex justify-center gap-4 bg-white rounded-t-2xl shadow-md">
-          {!Object.values(submitted).some(s => s.submitted) && (
-            <button
-              onClick={handleSubmit}
-              className="bg-success hover:bg-green-400 text-white text-xl font-bold px-16 py-4 rounded-full shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
-              disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
-            >
-              ✅ 提交答案
-            </button>
-          )}
-          
-          <button
-            onClick={handleRestart}
-            className="bg-primary hover:bg-red-500 text-white font-bold px-8 py-4 rounded-lg shadow-md transition-colors"
-          >
-            🔄 再来一次
-          </button>
-        </div>
-
         {/* 浮动鼓励文字 - 显示在顶部导航栏下方 */}
         {showEncouragement && (
           <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-fade-out">
@@ -560,32 +540,35 @@ const SentenceGame = () => {
             isCorrect={submitted[currentSlide]?.correct || false}
             onAnswerChange={handleAnswerChange}
             initialAnswer={userAnswers[currentSlide] || null}
+            onRestartGame={handleRestart}
           />
         </div>
 
         {/* 分页指示器 */}
-        <div className="flex justify-center gap-2 p-4 bg-white border-t">
-          {questions.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`
-                w-3 h-3 rounded-full transition-all
-                ${index === currentSlide 
-                  ? 'bg-primary scale-125' 
-                  : 'bg-gray-300 hover:bg-gray-400'}
-                ${submitted[index]?.submitted 
-                  ? submitted[index]?.correct 
-                    ? 'bg-green-500' 
-                    : 'bg-red-500'
-                  : ''}
-              `}
-              title={`第 ${index + 1} 题`}
-            />
-          ))}
+        <div className="flex flex-col items-center gap-2 p-4 bg-white border-t">
+          <div className="flex justify-center gap-2 mb-2">
+            {questions.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`
+                  w-3 h-3 rounded-full transition-all
+                  ${index === currentSlide 
+                    ? 'bg-primary scale-125' 
+                    : 'bg-gray-300 hover:bg-gray-400'}
+                  ${submitted[index]?.submitted 
+                    ? submitted[index]?.correct 
+                      ? 'bg-green-500' 
+                      : 'bg-red-500'
+                    : ''}
+                `}
+                title={`第 ${index + 1} 题`}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* 题目切换按钮 - 移到底部 */}
+        {/* 题目切换按钮和提交按钮 - 移到底部 */}
         <div className="flex justify-between items-center p-4 bg-white border-t">
           <button
             onClick={goToPrevious}
@@ -623,18 +606,25 @@ const SentenceGame = () => {
             )}
           </div>
           
-          <button
-            onClick={goToNext}
-            disabled={currentSlide === questions.length - 1}
-            className={`
-              px-6 py-3 rounded-lg font-bold text-lg transition-all
-              ${currentSlide === questions.length - 1
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                : 'bg-secondary text-white hover:bg-cyan-500 hover:scale-105'}
-            `}
-          >
-            下一题 ➡️
-          </button>
+          {/* 如果不是最后一题，显示下一题按钮；如果是最后一题且未提交，显示提交答案按钮 */}
+          {currentSlide < questions.length - 1 ? (
+            <button
+              onClick={goToNext}
+              className="px-6 py-3 rounded-lg font-bold text-lg transition-all bg-secondary text-white hover:bg-cyan-500 hover:scale-105"
+            >
+              下一题 ➡️
+            </button>
+          ) : (
+            !Object.values(submitted).some(s => s.submitted) && (
+              <button
+                onClick={handleSubmit}
+                className="bg-success hover:bg-green-400 text-white text-xl font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
+              >
+                ✅ 提交答案
+              </button>
+            )
+          )}
         </div>
       </div>
     );

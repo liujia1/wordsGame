@@ -49,7 +49,8 @@ const WordSlide = ({
   isSubmitted = false, 
   isCorrect = false,
   onAnswerChange,
-  initialAnswer = null 
+  initialAnswer = null,
+  onRestartGame
 }) => {
   // 将句子拆分为单词
   const words = splitSentence(sentence);
@@ -236,17 +237,25 @@ const WordSlide = ({
           <h3 className="text-xl font-bold text-gray-600 text-center flex-1">
             你的答案
           </h3>
-          <button
-            onClick={handleReset}
-            disabled={isSubmitted}
-            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-              isSubmitted 
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                : 'bg-orange-500 text-white hover:bg-orange-600 shadow-md'
-            }`}
-          >
-            🔄 重新开始
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleReset}
+              disabled={isSubmitted}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                isSubmitted 
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                  : 'bg-orange-500 text-white hover:bg-orange-600 shadow-md'
+              }`}
+            >
+              🗑️ 清空
+            </button>
+            <button
+              onClick={onRestartGame}
+              className="px-4 py-2 rounded-lg font-medium bg-primary text-white hover:bg-red-500 shadow-md transition-all duration-200"
+            >
+              🔄 再来一次
+            </button>
+          </div>
         </div>
         <div className="flex flex-wrap justify-center items-center min-h-[120px] bg-blue-50 rounded-xl p-4 border-2 border-blue-200 gap-3">
           {renderAnswer()}
