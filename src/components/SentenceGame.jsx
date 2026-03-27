@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WordSlide from './WordSlide';
 import { selectQuestions, checkAnswer, splitSentence } from '../utils/gameHelpers';
+import sentencesData from '../data/sentences.txt?raw';
 
 /**
  * 句子游戏主组件
@@ -16,33 +17,42 @@ const SentenceGame = () => {
   const [isPerfectScore, setIsPerfectScore] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [showEncouragement, setShowEncouragement] = useState(false);
+  const [comboCount, setComboCount] = useState(0); // 连击次数
+  const [showComboEffect, setShowComboEffect] = useState(false); // 显示连击特效
 
   // 读取句子文件
   useEffect(() => {
-    // 直接在代码中定义默认句子（避免路径问题）
-    const defaultSentences = [
-      'I love you.',
-      'She is a teacher.',
-      'They play basketball.',
-      'He reads a book.',
-      'We go to school.',
-      'The cat is cute.',
-      'My name is Tom.',
-      'It is sunny today.',
-      'They are happy.',
-      'She likes apples.',
-      'He can swim fast.',
-      'The dog runs quickly.',
-      'I have a dream.',
-      'You are my friend.',
-      'We study English.',
-      'The bird sings beautifully.',
-      'She dances very well.',
-      'He plays the piano.',
-      'They watch TV together.',
-      'I eat breakfast at 7.',
-    ];
-    setSentences(defaultSentences);
+    try {
+      // 从 sentences.txt 文件读取句子（使用 Vite 的 ?raw 导入）
+      const loadedSentences = sentencesData
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line.length > 0);
+      
+      if (loadedSentences.length === 0) {
+        console.warn('句子文件为空，使用默认句子');
+        // 如果文件为空，使用默认句子
+        setSentences([
+          'I love you.',
+          'She is a teacher.',
+          'They play basketball.',
+          'He reads a book.',
+          'We go to school.',
+        ]);
+      } else {
+        setSentences(loadedSentences);
+      }
+    } catch (error) {
+      console.error('加载句子文件失败:', error);
+      // 出错时使用默认句子
+      setSentences([
+        'I love you.',
+        'She is a teacher.',
+        'They play basketball.',
+        'He reads a book.',
+        'We go to school.',
+      ]);
+    }
   }, []);
 
   // 开始游戏
@@ -79,6 +89,95 @@ const SentenceGame = () => {
       ...prev,
       [slideIndex]: answer,
     }));
+  };
+
+  // 播放连击音效（更激昂的音乐）
+  const playComboSound = (comboLevel) => {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // 根据连击等级播放不同的音效
+      const baseFreq = 523.25; // C5
+      const intervals = [];
+      
+      if (comboLevel >= 10) {
+        // 10 连击：华丽的 ascending arpeggio
+        intervals.push([0, baseFreq]);
+        intervals.push([0.1, baseFreq * 1.25]);
+        intervals.push([0.2, baseFreq * 1.5]);
+        intervals.push([0.3, baseFreq * 2]);
+        intervals.push([0.4, baseFreq * 2.5]);
+      } else if (comboLevel >= 5) {
+        // 5 连击：ascending arpeggio
+        intervals.push([0, baseFreq]);
+        intervals.push([0.15, baseFreq * 1.25]);
+        intervals.push([0.3, baseFreq * 1.5]);
+        intervals.push([0.45, baseFreq * 2]);
+      } else {
+        // 3 连击：简单的三和弦
+        intervals.push([0, baseFreq]);
+        intervals.push([0.1, baseFreq * 1.25]);
+        intervals.push([0.2, baseFreq * 1.5]);
+      }
+      
+      intervals.forEach(([delay, frequency]) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = 'triangle';
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime + delay);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime + delay);
+        gainNode.gain.linearRampToValueAtTime(0.4, audioContext.currentTime + delay + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + delay + 0.6);
+        
+        oscillator.start(audioContext.currentTime + delay);
+        oscillator.stop(audioContext.currentTime + delay + 0.8);
+      });
+    } catch (error) {
+      console.log('Combo sound failed:', error);
+    }
+  };
+
+  // 语音合成 - 连击播报（使用英文游戏术语）
+  const speakCombo = (comboLevel) => {
+    try {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        
+        let text = '';
+        let lang = 'en-US'; // 使用英文语音
+        
+        if (comboLevel === 2) {
+          text = 'Double Kill!';
+        } else if (comboLevel === 3) {
+          text = 'Triple Kill!';
+        } else if (comboLevel === 4) {
+          text = 'Quadra Kill!';
+        } else if (comboLevel === 5) {
+          text = 'Penta Kill!';
+        } else if (comboLevel >= 10) {
+          text = 'Legendary!';
+        } else if (comboLevel > 5) {
+          text = `${comboLevel} Kill Streak!`;
+        } else {
+          text = `${comboLevel} Kill Streak!`;
+        }
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        utterance.rate = 0.9;
+        utterance.pitch = 1.2;
+        utterance.volume = 1;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    } catch (error) {
+      console.log('Combo speech failed:', error);
+    }
   };
 
   // 播放庆祝音效
@@ -183,19 +282,43 @@ const SentenceGame = () => {
 
     setSubmitted(newSubmitted);
     setScore(newScore);
-    
+        
     // 检查是否满分
     if (newScore === 100) {
       setIsPerfectScore(true);
       setShowCelebration(true);
       playCelebrationSound();
-      
-      // 3秒后隐藏庆祝效果
+          
+      // 连击系统：如果之前也是满分，增加连击数
+      setComboCount(prev => {
+        const newCombo = prev + 1;
+        console.log('连击数:', newCombo);
+              
+        // 达到连击里程碑时触发特殊效果（从 2 连击开始）
+        if (newCombo >= 2) {
+          setShowComboEffect(true);
+          playComboSound(newCombo);
+          speakCombo(newCombo);
+                
+          // 3 秒后隐藏连击特效
+          setTimeout(() => {
+            setShowComboEffect(false);
+          }, 3000);
+        }
+              
+        return newCombo;
+      });
+          
+      // 3 秒后隐藏庆祝效果
       setTimeout(() => {
         setShowCelebration(false);
       }, 3000);
     } else {
       setIsPerfectScore(false);
+      // 重置连击
+      setComboCount(0);
+      setShowComboEffect(false);
+          
       // 播放泄气音效
       playDeflateSound();
       // 显示鼓励文字
@@ -204,7 +327,7 @@ const SentenceGame = () => {
       setTimeout(() => {
         speakEncouragement();
       }, 500);
-      // 1.5秒后隐藏鼓励文字
+      // 1.5 秒后隐藏鼓励文字
       setTimeout(() => {
         setShowEncouragement(false);
       }, 2500);
@@ -231,11 +354,59 @@ const SentenceGame = () => {
     setShowCelebration(false);
     setShowEncouragement(false);
     // 保持 gameStarted 为 true，不跳转到开始界面
+    // 注意：不重置 comboCount，保持连击记录
   };
 
   // 切换到指定题目
   const goToSlide = (index) => {
     setCurrentSlide(index);
+  };
+
+  // 连击特效组件
+  const ComboEffect = ({ combo }) => {
+    const getComboColor = () => {
+      if (combo >= 10) return 'from-yellow-400 via-red-500 to-pink-500';
+      if (combo === 5) return 'from-purple-400 via-pink-500 to-red-500';
+      if (combo === 4) return 'from-green-400 via-cyan-500 to-blue-500';
+      if (combo === 3) return 'from-blue-400 via-green-500 to-cyan-500';
+      if (combo === 2) return 'from-orange-400 to-red-500';
+      return 'from-blue-400 via-cyan-500 to-green-500';
+    };
+    
+    const getComboText = () => {
+      if (combo >= 10) return '🔥 LEGENDARY! 🔥';
+      if (combo === 5) return '🔥 PENTA KILL! 🔥🔥';
+      if (combo === 4) return '🔥 QUADRA KILL! 🔥';
+      if (combo === 3) return '🔥 TRIPLE KILL! 🔥';
+      if (combo === 2) return '⚡ DOUBLE KILL! ⚡';
+      return `${combo} KILL STREAK!`;
+    };
+    
+    return (
+      <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+        <div className="text-center animate-bounce">
+          <div className="text-6xl mb-4 animate-pulse"></div>
+          <div className={`text-5xl md:text-6xl font-bold text-white drop-shadow-lg bg-gradient-to-r ${getComboColor()} px-8 py-4 rounded-2xl animate-pulse`}>
+            {getComboText()}
+          </div>
+          <div className="text-3xl text-yellow-300 mt-4 drop-shadow-lg">
+            ⭐ x {combo} ⭐
+          </div>
+        </div>
+        <style>{`
+          @keyframes combo-pulse {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.1);
+              opacity: 0.8;
+            }
+          }
+        `}</style>
+      </div>
+    );
   };
 
   // 彩带特效组件
@@ -329,49 +500,23 @@ const SentenceGame = () => {
 
     return (
       <div className="flex flex-col h-[calc(100vh-80px)]">
-        {/* 题目切换按钮 */}
-        <div className="flex justify-between items-center p-4 bg-white rounded-t-2xl shadow-md">
-          <button
-            onClick={goToPrevious}
-            disabled={currentSlide === 0}
-            className={`
-              px-6 py-3 rounded-lg font-bold text-lg transition-all
-              ${currentSlide === 0 
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                : 'bg-primary text-white hover:bg-red-500 hover:scale-105'}
-            `}
-          >
-            ⬅️ 上一题
-          </button>
-          
-          <div className="text-center flex flex-col items-center">
-            <p className="text-lg font-bold text-gray-700">
-              第 {currentSlide + 1} / {questions.length} 题
-            </p>
-            {/* 提交后显示得分 */}
-            {Object.values(submitted).some(s => s.submitted) && (
-              <div className={`
-                mt-1 px-3 py-1 rounded-full text-sm font-bold transition-all
-                ${isPerfectScore 
-                  ? 'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white' 
-                  : 'bg-gray-100 text-primary'}
-              `}>
-                {isPerfectScore ? '🏆' : ''} 得分：{score} / 100 {isPerfectScore ? '🏆' : ''}
-              </div>
-            )}
-          </div>
+        {/* 提交按钮和重新开始按钮 - 移到顶部 */}
+        <div className="p-4 flex justify-center gap-4 bg-white rounded-t-2xl shadow-md">
+          {!Object.values(submitted).some(s => s.submitted) && (
+            <button
+              onClick={handleSubmit}
+              className="bg-success hover:bg-green-400 text-white text-xl font-bold px-16 py-4 rounded-full shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
+            >
+              ✅ 提交答案
+            </button>
+          )}
           
           <button
-            onClick={goToNext}
-            disabled={currentSlide === questions.length - 1}
-            className={`
-              px-6 py-3 rounded-lg font-bold text-lg transition-all
-              ${currentSlide === questions.length - 1
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                : 'bg-secondary text-white hover:bg-cyan-500 hover:scale-105'}
-            `}
+            onClick={handleRestart}
+            className="bg-primary hover:bg-red-500 text-white font-bold px-8 py-4 rounded-lg shadow-md transition-colors"
           >
-            下一题 ➡️
+            🔄 再来一次
           </button>
         </div>
 
@@ -440,36 +585,57 @@ const SentenceGame = () => {
           ))}
         </div>
 
-        {/* 提交按钮和重新开始按钮 */}
-        <div className="p-4 flex justify-center gap-4">
-          {!Object.values(submitted).some(s => s.submitted) && (
-            <button
-              onClick={handleSubmit}
-              className="bg-success hover:bg-green-400 text-white text-xl font-bold px-16 py-4 rounded-full shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
-              disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
-            >
-              ✅ 提交答案
-            </button>
-          )}
+        {/* 题目切换按钮 - 移到底部 */}
+        <div className="flex justify-between items-center p-4 bg-white border-t">
+          <button
+            onClick={goToPrevious}
+            disabled={currentSlide === 0}
+            className={`
+              px-6 py-3 rounded-lg font-bold text-lg transition-all
+              ${currentSlide === 0 
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-primary text-white hover:bg-red-500 hover:scale-105'}
+            `}
+          >
+            ⬅️ 上一题
+          </button>
+          
+          <div className="text-center flex flex-col items-center">
+            <p className="text-lg font-bold text-gray-700">
+              第 {currentSlide + 1} / {questions.length} 题
+            </p>
+            {/* 提交后显示得分 */}
+            {Object.values(submitted).some(s => s.submitted) && (
+              <div className={`
+                mt-1 px-3 py-1 rounded-full text-sm font-bold transition-all
+                ${isPerfectScore 
+                  ? 'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white' 
+                  : 'bg-gray-100 text-primary'}
+              `}>
+                {isPerfectScore ? '🏆' : ''} 得分：{score} / 100 {isPerfectScore ? '🏆' : ''}
+              </div>
+            )}
+            {/* 显示连击数 */}
+            {comboCount >= 2 && (
+              <div className="mt-1 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-orange-400 to-red-500 text-white animate-pulse">
+                🔥 {comboCount === 2 ? 'DOUBLE' : comboCount === 3 ? 'TRIPLE' : comboCount === 4 ? 'QUADRA' : comboCount === 5 ? 'PENTA' : comboCount >= 10 ? 'LEGENDARY' : `${comboCount}`} KILL STREAK
+              </div>
+            )}
+          </div>
           
           <button
-            onClick={handleRestart}
-            className="bg-primary hover:bg-red-500 text-white font-bold px-8 py-4 rounded-lg shadow-md transition-colors"
+            onClick={goToNext}
+            disabled={currentSlide === questions.length - 1}
+            className={`
+              px-6 py-3 rounded-lg font-bold text-lg transition-all
+              ${currentSlide === questions.length - 1
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-secondary text-white hover:bg-cyan-500 hover:scale-105'}
+            `}
           >
-            🔄 再来一次
+            下一题 ➡️
           </button>
         </div>
-        
-        {/* 提交后显示满分庆祝 - 只在满分时显示 */}
-        {Object.values(submitted).some(s => s.submitted) && isPerfectScore && (
-          <div className="p-4 flex justify-center">
-            <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-xl px-6 py-3 shadow-lg text-center animate-pulse">
-              <p className="text-2xl font-bold text-white">
-                🏆 最终得分：{score} / 100 🏆
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     );
   };
@@ -478,6 +644,7 @@ const SentenceGame = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-pink-200 pt-4">
       {showCelebration && <ConfettiEffect />}
       {showCelebration && <PerfectScoreCelebration />}
+      {showComboEffect && <ComboEffect combo={comboCount} />}
       <div className="container mx-auto pb-4">
         {!gameStarted ? renderStartScreen() : renderGame()}
       </div>

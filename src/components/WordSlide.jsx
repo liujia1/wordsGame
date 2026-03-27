@@ -87,13 +87,35 @@ const WordSlide = ({
     }
   }, [initialAnswer, shuffledWords]);
 
-  // 点击单词卡片 -> 放入答案区
+  // 点击单词卡片 -> 放入或移除答案区
   const handleWordClick = useCallback((word, originalIndex) => {
     if (isSubmitted) return;
     
     // 检查是否已经放置
     const wordIndexInShuffled = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
-    if (wordIndexInShuffled === -1 || wordStatuses[wordIndexInShuffled] === 'placed') {
+    if (wordIndexInShuffled === -1) {
+      return;
+    }
+    
+    // 如果已经放置，则从答案区移除（取消选择）
+    if (wordStatuses[wordIndexInShuffled] === 'placed') {
+      // 在答案区找到这个单词
+      const answerIndex = userAnswer.findIndex(w => w === word);
+      if (answerIndex !== -1) {
+        // 从答案区移除
+        const newAnswer = userAnswer.filter((_, i) => i !== answerIndex);
+        setUserAnswer(newAnswer);
+        
+        // 更新单词状态
+        const newStatuses = [...wordStatuses];
+        newStatuses[wordIndexInShuffled] = 'available';
+        setWordStatuses(newStatuses);
+        
+        // 通知父组件
+        if (onAnswerChange) {
+          onAnswerChange(slideIndex, newAnswer);
+        }
+      }
       return;
     }
     
