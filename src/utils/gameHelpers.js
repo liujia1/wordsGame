@@ -5,7 +5,10 @@
  */
 export const splitSentence = (sentence) => {
   // 使用正则表达式匹配单词和标点
-  const tokens = sentence.match(/\w+|[^\w\s]/g);
+  // \w+'\w+ 匹配带撇号的单词（如 doesn't, I'm, won't）
+  // \w+ 匹配普通单词
+  // |[^\w\s] 匹配标点符号
+  const tokens = sentence.match(/\w+'\w+|\w+|[^\w\s]/g);
   return tokens || [];
 };
 
