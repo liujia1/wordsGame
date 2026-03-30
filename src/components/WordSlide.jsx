@@ -86,17 +86,15 @@ const WordSlide = ({
     }
   }, [userAnswer, words.length, autoSwitch, hasModified, onNextQuestion]);
 
-  // 当 initialAnswer 变化时，恢复答案
+  // 当 initialAnswer 变化时，恢复答案（不重新洗牌）
   useEffect(() => {
     if (initialAnswer && initialAnswer.length > 0) {
-      // 直接使用 initialAnswer（已经是对象数组）
       setUserAnswer(initialAnswer);
       
       // 更新单词状态：根据 originalIndex 精确匹配
       const newStatuses = shuffledWords.map(() => 'available');
       
       initialAnswer.forEach(item => {
-        // 通过 originalIndex 精确找到对应的单词卡片
         const wordIndex = shuffledWords.findIndex(w => w.originalIndex === item.originalIndex);
         if (wordIndex !== -1) {
           newStatuses[wordIndex] = 'placed';
@@ -109,12 +107,29 @@ const WordSlide = ({
     }
   }, [initialAnswer]);
 
-  // 当句子变化或 slideIndex 变化时，重新洗牌并重置所有状态
+  // 当句子变化或 slideIndex 变化时，重新洗牌并恢复答案
   useEffect(() => {
     const newShuffledWords = shuffleArray(words.map((w, i) => ({ word: w, originalIndex: i })));
     setShuffledWords(newShuffledWords);
-    setUserAnswer([]);
-    setWordStatuses(newShuffledWords.map(() => 'available'));
+    
+    // 如果有 initialAnswer，则恢复答案；否则清空
+    if (initialAnswer && initialAnswer.length > 0) {
+      setUserAnswer(initialAnswer);
+      
+      // 更新单词状态：根据 originalIndex 精确匹配
+      const newStatuses = newShuffledWords.map(() => 'available');
+      
+      initialAnswer.forEach(item => {
+        const wordIndex = newShuffledWords.findIndex(w => w.originalIndex === item.originalIndex);
+        if (wordIndex !== -1) {
+          newStatuses[wordIndex] = 'placed';
+        }
+      });
+      setWordStatuses(newStatuses);
+    } else {
+      setUserAnswer([]);
+      setWordStatuses(newShuffledWords.map(() => 'available'));
+    }
   }, [sentence, slideIndex]);
 
   // 点击单词卡片 -> 放入或移除答案区
