@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { splitSentence, seededShuffle } from '../utils/gameHelpers';
+import { splitSentence, shuffleArray } from '../utils/gameHelpers';
 
 /**
  * 单词卡片组件（点击式）
@@ -59,9 +59,9 @@ const WordSlide = ({
   // 将句子拆分为单词
   const words = splitSentence(sentence);
   
-  // 使用句子内容作为种子进行确定性洗牌（确保同一个题目每次洗牌结果相同）
-  const [shuffledWords] = useState(() => 
-    seededShuffle(words.map((w, i) => ({ word: w, originalIndex: i })), sentence)
+  // 使用普通 shuffle 实现完全随机（每次渲染都会重新洗牌）
+  const [shuffledWords, setShuffledWords] = useState(() => 
+    shuffleArray(words.map((w, i) => ({ word: w, originalIndex: i })))
   );
   
   // 用户的答案（按顺序放置）
@@ -107,7 +107,15 @@ const WordSlide = ({
       setUserAnswer([]);
       setWordStatuses(shuffledWords.map(() => 'available'));
     }
-  }, [initialAnswer, shuffledWords]);
+  }, [initialAnswer]);
+
+  // 当句子变化或 slideIndex 变化时，重新洗牌并重置所有状态
+  useEffect(() => {
+    const newShuffledWords = shuffleArray(words.map((w, i) => ({ word: w, originalIndex: i })));
+    setShuffledWords(newShuffledWords);
+    setUserAnswer([]);
+    setWordStatuses(newShuffledWords.map(() => 'available'));
+  }, [sentence, slideIndex]);
 
   // 点击单词卡片 -> 放入或移除答案区
   const handleWordClick = useCallback((word, originalIndex) => {

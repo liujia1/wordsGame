@@ -21,6 +21,7 @@ const SentenceGame = () => {
   const [showComboEffect, setShowComboEffect] = useState(false); // 显示连击特效
   const [autoSwitch, setAutoSwitch] = useState(false); // 自动切换开关（全局状态）
   const [modifiedSlides, setModifiedSlides] = useState({}); // 记录每道题是否有过答题操作（独立变量）
+  const [gameRound, setGameRound] = useState(0); // 游戏轮次，用于强制刷新组件
 
   // 读取句子文件
   useEffect(() => {
@@ -353,6 +354,7 @@ const SentenceGame = () => {
     setIsPerfectScore(false);
     setShowCelebration(false);
     setShowEncouragement(false);
+    setGameRound(prev => prev + 1); // 增加游戏轮次，强制刷新 WordSlide 组件
     // 保持 gameStarted 为 true，不跳转到开始界面
     // 注意：不重置 comboCount，保持连击记录
     // 注意：不重置 autoSwitch，保持自动切换开关状态
@@ -560,7 +562,7 @@ const SentenceGame = () => {
         {/* 当前题目幻灯片 */}
         <div className="flex-1 p-4 bg-white">
           <WordSlide
-            key={questions[currentSlide]}
+            key={`${gameRound}-${currentSlide}-${questions[currentSlide]}`}
             sentence={questions[currentSlide]}
             slideIndex={currentSlide}
             isSubmitted={submitted[currentSlide]?.submitted || false}
