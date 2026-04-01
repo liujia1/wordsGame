@@ -1,77 +1,386 @@
-I am doing my homework in my bedroom.
-My desk is next to my bed. 
-My favorite subject is math. 
-What is your favorite subject? 
-It is 6:30 in the evening. 
-I am at home. 
-I am listening to music. 
-We eat dinner at 7 o'clock. 
-I want spaghetti. 
-When do you eat dinner? 
-I am excited. 
-I am playing my new video game in the living room. 
-I like karate. 
-I go to karate class on Mondays. 
-When do you go to English class? 
-They smell good. 
-My favorite color is purple. 
-I am wearing a purple shirt and a purple skirt. 
-I am wearing purple shoes too. 
-What are you wearing?
-What is the date today? 
-It is January 1st. 
-Danny, do you like peanuts? 
-Sure, I like peanuts. 
-They are great. 
-Let's share. 
-Mom, can I have gum, please? 
-Are you thirsty? 
-What about juice or water? 
-I don't want popcorn. 
-What do you want? 
-Is that chocolate? 
+﻿My favorite day of the week is Saturday.
+In the morning, I always make my bed.
+Then, I usually go to the movie theater in the afternoon.
+What do you do on Saturdays?
+We are shopping at the department store.
+My aunt is a salesperson at the store.
+She likes nice clothes and shoes.
+I do too.
+I'm walking to my cousin's home.
+We always have fun.
+Yesterday, it was rainy.
+We were at the museum.
+We can go to the pool.
+Today is May 1st.
+My uncle and I are making a cake.
+He's making a fruit salad too.
+The party is at 6 o'clock.
+See you then.
+There are 1,000 grams in a kilogram.
+There are 100 centimeters in a meter.
+There are 1,000 meters in a kilometer.
+Work with your partner.
+Work with your group.
+Write your name at the top of the page.
+Write your answer on the board.
+Let's hike up the hill.
+Let's eat first and then hike.
+Let's grill hamburgers.
+Look, Dad, I can climb.
+Don't go too high.
+Don't canoe there, Mike.
+Watch out.
+Do you want to fish with me?
+I think I have a fish.
+Can you help me?
+Please be quiet.
+The birds don't like noise.
+Can you see that bird in the tree?
+You need to be quiet when you watch birds.
+Oh, I see it now.
+What is he like doing?
+He likes climbing.
+What is she like doing?
+She likes climbing.
+Does he like climbing?
+Yes, he likes it a lot.
+Does she like climbing?
+Yes, she likes it a lot.
+No, he doesn't like it at all.
+No, she doesn't like it at all.
+Is he good at skiing?
+Is she good at skiing?
+I can help you.
+You can do it.
+Yes, I can.
+The girls are going very fast.
+Emma, be careful.
+Watch out everybody.
+When you go snowboarding, always wear a helmet.
+When you go to the beach, always put on sunscreen.
+Drink water and wear a hat too.
+When you go canoeing on the river, always wear a life jacket.
+Never stand up in the canoe.
+Be safe.
+Look at the hippopotamus.
+Why is it in the water?
+I think it likes to swim.
+Look, Julie.
+It looks just like my toy panda at home.
+But this one is a lot bigger.
+James, look at the butterfly.
+I can't see it.
+I don't like bees.
+I don't see it.
+Ah, stop.
+Alex, look at that gorilla.
+It looks so strong.
+It does look strong.
+Can it learn to fly?
+Now, let's go see the hippopotamus.
+The hippopotamus is bigger than the panda.
+The hippopotamus is the biggest.
+Which one is the smallest?
+The bee is the smallest.
+The eel is as long as the seal.
+Is the eel as long as the seal?
+Yes, it is.
+Mike and Leo are at the aquarium with their mom.
+Which one would you like?
+I'd like the smallest one please.
+I'd like the biggest one please.
+Mike's dad is at work.
+He likes caps.
+Which one would he like?
+Do you like it Dad?
+Thanks boys, this is the best cap.
 Can I help you?
-Do you have potato chips? 
-Can I have a soda, too, please? 
-I want some gum. 
-I don't want any gum. 
-He wants some gum. 
-He does not want any gum. 
-She wants some gum. 
-She doesn't want any gum. 
-I don't want any gum. 
-She wants some popcorn. 
-He wants some peanuts.
-I don't want any chocolate.
-He doesn't want any potato chips.
-She wants some soda.
-What does he want? 
-He wants some gum. 
-What does she want? 
-She wants some gum. 
-What do you want? 
-I want some gum. 
-Do you need any carrots? 
-What do they need? 
-They need a carrot. 
+I have very long hair.
+Can you cut it?
+First, look at these magazines.
+Then let's talk about it.
+Which hairstyle would you like, Anne?
+Can I have that one?
+That girl has shoulder length hair.
+You can't have blonde hair.
+My hair is brown, and it's curly too.
+I like my hair.
+You have nice hair.
+You have very nice hair too.
+What would you like to do?
+I'd like to have really short hair, please.
+Like that.
+First, let's wash it.
+Then I can cut it.
+I like your straight hair, Julie.
+Oh, look at that picture.
+That woman is so pretty.
+Yes, I love her hair.
+What does he look like?
+He has short black hair and brown eyes.
+What does she look like?
+She has short black hair and glasses.
+He has short black hair and a beard.
+Which one is your brother?
+Which one is your sister?
+What does the watch look like?
+What do the earrings look like?
+They are new and black.
+Which watch does he want to wear?
+He wants to wear the black one.
+Which watch does she want to wear?
+She wants to wear the black one.
+Which gloves does he want to wear?
+He wants to wear the black ones.
+Which gloves does she want to wear?
+She wants to wear the black ones.
+It's the day of the school play.
+Good luck with the play.
+What can I do now?
+You can share mine.
+Mike and his mother are watching the play.
+Which one is Emma?
+She's the one wearing black and white socks.
+Who's that wearing the red t-shirt?
+The caterpillar is the same color as the stick.
+The caterpillar is the same shape as the stick.
+The shape and color of some insects and animals help them to be safe.
+They can hide from other animals.
+Can you find the caterpillar?
+Birds can't see this one.
+This butterfly is hard to see.
+It looks like the leaf.
+This snake is the same color and shape as the grass.
+This fish is good at hiding in the sand.
+Sharks can't find it.
+Look at number 22.
+I like her blue bike.
+Her name is Olivia.
+Her bike is small and new.
+Oh, look at Karen.
+Oh, I see them.
+His name is John.
+Number 39 is strong.
+I know.
+Is he thirsty?
+Let's ride our bikes too.
+The girl is tall.
+The boy is taller.
+The man is short.
+The woman is shorter.
+The woman is old.
+The man is older.
+The boy is young.
+The girl is younger.
+The boy is strong.
+The girl is stronger.
+The boy is weak.
+The girl is weaker.
+Danny is taller.
+Mike is older.
+Leo is younger.
+Emma is stronger.
+Anne is weaker.
+The red socks are thicker than the blue socks.
+The blue socks are thinner than the red socks.
+The white t-shirt is cleaner than the pink t-shirt.
+The pink t-shirt is dirtier than the white t-shirt.
+The purple hat is prettier than the brown hat.
+The brown hat is uglier than the purple hat.
+Is the red sweater thicker than the blue sweater?
+Is the red sweater thinner than the blue sweater?
+Julie and Emma are shopping.
+Look at her shirt.
+I like her boots.
+I like this shirt.
+We can wear cool clothes too.
+I want to be older.
+I like your shoes.
+Which one is harder?
+The marble is harder.
+Which one is softer?
+The sofa is softer.
+Which one is heavier?
+The book is heavier.
+Which one is lighter?
+The box is lighter.
+Do you?
+I make my bed in the morning.
+I walk the dog in the afternoon.
+Do you have a dog?
+My grandmother does.
+She has a nice dog.
+I walk her dog in the afternoon.
+My mom doesn't like dirty rooms.
+I do laundry in the morning.
+When do you do laundry?
+I do laundry in the evening.
+I make my bed before school.
+I do laundry after school.
+I walk the dog before school.
+When does he make his bed?
+He makes his bed before school.
+When does she make her bed?
+She makes her bed before school.
+When does he walk the dog?
+He walks the dog before school.
+When does she walk the dog?
+She walks the dog before school.
+When does he do laundry?
+He does laundry before school.
+When does she set the table?
+When does he clean his room?
+When does she wash the dishes?
+I usually take out the garbage.
+What are his chores?
+What are her chores?
+She never takes out the garbage.
+Mike and Danny are at school.
+Do you want to come over?
+Oh, my brother's birthday party is today.
+Don't run.
+Mike and Danny have a great idea.
+Their milk is great.
+My name is Luke.
+I go to school at 8.30 in the morning.
+Hello, my name is Brian.
+I do my homework in the afternoon.
+My name is Allison.
+I help my family on the farm.
+After breakfast, I go to school.
+I come home in the afternoon at 3.30.
+After school, I watch TV and eat a snack.
+I love popcorn.
+We have carrots, tomatoes, and peas.
+We have dinner at 7 o'clock.
+After dinner, I do my homework.
+Finally, I go to bed at 9.30.
+I'm Laura, and this is my family.
+My brother takes out the garbage.
+Oh look!
+What do you like here?
+The amusement park is cool.
+The rides are fast.
+I like that.
+The fish in the aquarium are so pretty.
+There are big fish and little fish.
+I can swim in the big pool too.
+I like the museum.
+There is very pretty art.
+The hotel is great.
+Everybody is helpful and nice.
+Can we go to the hotel now?
+Let's go.
+Where was he yesterday?
+He was at the beach.
+Where was she yesterday?
+She was at the beach.
+Was he at the beach yesterday?
+Yes, he was.
+He was at the aquarium.
+Was she at the beach yesterday?
+Yes, she was.
+She was at the aquarium.
+Where were they yesterday?
+They were at the bookstore.
+Were they at the bookstore yesterday?
+Yes, they were.
+They were at the pharmacy.
+The class is at the amusement park today.
+Class, let's meet here at five o'clock.
+Okay, see you then.
+Where are Mike and Danny?
+Do we have time for ice cream?
+Yes we do.
+Where were you?
+We were...
+It's time for a new watch, Mike.
+Let's meet here before school.
+See you at 7.15.
+Okay, be on time.
+Let's meet here in the afternoon.
+See you at 1 o'clock.
+Let's meet here at 5 o'clock.
+See you at 5 o'clock.
+How was the weather yesterday?
+It was sunny.
+How was the weather on Monday?
+We're at the beach in Mexico.
+Turkey is nice.
+On Thursday, it was cloudy.
+How are you?
+Yesterday, it was stormy.
+My family was in South Korea.
+How was the weather?
+It was cold.
+On Friday, it was snowy.
+Is that my new lunch box?
+Do you like it?
+Dad, can I borrow the stapler?
+I don't know.
+Oh, there it is.
+I need a dictionary today, too.
+Where is it?
+It was on the table yesterday.
+Oh, look.
+Where was the folder?
+It was on the table.
+What was on the table?
+A folder was on the table.
+There were some magazines on the table.
+Were there any magazines on the table?
+Yes, there were.
+My desk is next to my bed.
+My favorite subject is math.
+I'm listening to music.
+We eat dinner at 7 o'clock.
+I want spaghetti.
+When do you eat dinner?
+I'm playing my new video game in the living room.
+I like karate.
+I go to karate class on Mondays.
+When do you go to English class?
+Look, purple flowers.
+My favorite color is purple.
+I'm wearing a purple shirt and a purple skirt.
+I'm wearing purple shoes too.
+What are you wearing?
+Study for a test.
+Take a test.
+Danny, do you like peanuts?
+Sure, I like peanuts.
+Okay, let's share.
+Mom, can I have gum, please?
+Are you thirsty?
+Mike, I don't want popcorn.
+What do you want, Leo?
+Is that chocolate?
+Do you have potato chips?
+Yes, here you are.
+Can I have a soda, too, please?
+I want some gum.
+I don't want any gum.
+He wants some gum.
+He doesn't want any gum.
+She wants some gum.
+She doesn't want any gum.
+What do you want?
+What does he want?
+What does she want?
+Do you need any carrots?
+Yes, we do.
+What do they need?
+They need a carrot.
 They need some carrots.
-I need onions. 
-I have tomatoes. 
-I don't need tomatoes.
-Just try it. 
-Mike and Leo are hungry. 
-What's for lunch? 
-That sounds good. Salad? 
-I want french fries. 
-Just try it, Leo. 
-Vegetables are very good for you. 
-This tastes good!
-That sounds good. 
-But I want french fries. 
-What's for lunch?
-What's for breakfast?
-What's for dinner?
-I want to make an omelette. 
+Mike and Leo are hungry.
+I want french fries.
+Just try it, Leo.
+Vegetables are very good for you.
+Yeah, I like vegetables.
+But I want french fries.
+Just try it.
+But I want french fries, french fries, french fries.
+I want to make an omelette.
 I need some eggs and some milk.
 I want to make a smoothie.
 I need some bananas and some yogurt.
@@ -79,172 +388,421 @@ I want to make a fruit salad.
 I need some oranges and some peaches.
 I want to make a milkshake.
 I need some milk and some ice cream.
-Where are we going, Mike? 
-We're going to the park. 
-Look, there are Mike and Leo. 
-They're in front of the library. 
-Mike is wearing an orange t-shirt. 
-There's the movie theater. 
-Mom, can we see a movie? 
-Maybe we can go on Sunday. 
-Where can I get some eggs? 
-The supermarket is on this street. 
-Where is it? 
-It's the second building from here. 
-Can you see the post office? 
-Thank you so much. 
-You're so helpful. 
-You're welcome. 
-Come on, Danny. 
-I need a new shirt. 
-Are we going to the department store next to the post office? 
-It's time for lunch.
-Where's the park? 
-It's across from the movie theater. 
-Where's the movie theater? 
-It's across from the post office. 
-Where's the supermarket? 
-It's across from the department store.
-Where's the post office? 
-It's across from a library.
-Where's the department store? 
-It's across from the supermarket.
-Where's the library? 
-It's across from the park.
-Where's the park? 
-It's between the school and the movie theater. 
-Where's the movie theater? 
-It's between the park and the library. 
-Where's the library? 
-It's between the movie theater and the post office. 
-Where's the post office? 
-It's between the library and the supermarket. 
-Where's the supermarket? 
-It's between the post office and the department store.
-Where's the department store? 
-It's between the supermarket and the restaurant.
-What's he doing at the department store? 
+Where are we going, Mike?
+We're going to the park.
+Look, there are Mike and Leo.
+Mike is wearing an orange t-shirt.
+Now I see them.
+Mom, can we see a movie?
+Maybe we can go on Sunday.
+Where can I get some eggs?
+The supermarket is on this street.
+Can you see the post office?
+Then the supermarket is second.
+I see it.
+Come on, Danny.
+I need a new shirt.
+Are we going to the department store next to the post office?
+Yes, we are.
 He's shopping.
-What's she doing at the department store? 
-What's she doing at the movie theater? 
-She's watching a movie. 
-What's she doing at the library? 
-He's borrowing books. 
-What's she doing at the post office? 
-She's mailing letters. 
-What's she doing at the supermarket? 
-She's buying groceries. 
-What's he doing at the park? 
-He's kicking a ball.
-What are they doing at the department store? 
-What are they doing at the supermarket? 
-They're buying groceries. 
-What are they doing at the movie theater? 
-They're watching a movie. 
-What are they doing at the park? 
-They're kicking a ball. 
-What are they doing at the post office?
-They're mailing letters.
-What are they doing at the library? 
-They're borrowing books.
-What is he doing? 
-What is he doing at the movie theatre? 
-He's watching a movie at the movie theatre. 
-What are they doing at the movie theatre? 
-They're watching a movie at the movie theatre. 
-What's he doing at the library? 
-She's borrowing books at the library. 
-What are they doing at the library? 
-They're borrowing books at the library. 
-What's he doing at the post office? 
-He's mailing letters at the post office. 
-What are they doing at the post office? 
-They're mailing letters at the post office.
-It's over there. 
-The man is lost. 
-Excuse me. 
-Where's the post office? 
-It's a cross from the library. 
-Where's the library? 
-Well, it's between the school and the restaurant. 
-The school is a cross from the supermarket. 
-I see it. 
-Excuse me, where's the post office? 
-I see the post office. 
-Excuse me, where's the restaurant?  
-I see the restaurant. 
-Excuse me, where's the supermarket? 
-Excuse me, where's the post office? 
-Excuse me, where's the restaurant?
-Excuse me, where's the supermarket?
-Let's make a town. 
-First, color the house and buildings.
-What colors do you like? 
-Next, cut the paper What shapes can you see? 
-Then, fold the paper.
-Can your house stand? 
-Finally, glue the house Great job.
-My name is Stephanie. 
-My friends and I go to the movie theater on Saturdays. 
-It's between the library and the park. 
-We like watching movies. 
-We eat popcorn too
-I want some soda. 
-She wants some gum. 
-Where's the park? 
-It's across from the post office. 
-What are they doing at the library? 
-They're borrowing books.
-What are they doing at the supermarket? 
-They're buying groceries. 
-I want some potato chips. 
-What's she doing at the department store? 
 She's shopping.
-Are you the librarian? 
-Can I help you? 
-I'm looking for a great book. 
-Okay, let's see. 
-Where's the salesperson? 
-Is she a salesperson mom? 
-I think so. 
-Hi, can I help you? 
-We like that purple sofa. 
-Do you work here? 
-I'm a postal worker. 
-This is for my grandmother. 
-You're welcome. 
-Hi, I'm your server. 
-Can I have the steak, please? 
-What about you? 
-The spaghetti, please. 
-What's wrong? 
-My dog is sick. 
-Don't worry. 
-I can help. 
-That's good. 
-Danny, give the groceries to the cashier. 
+What are they doing at the department store?
+They're shopping.
+What are they doing at the supermarket?
+They're buying groceries.
+What are they doing at the movie theater?
+They're watching a movie.
+What are they doing at the park?
+What are they doing at the post office?
+What are they doing at the library?
+The man is lost.
+Yes, the school is across from the supermarket.
+Ah, I see it.
+I see the post office.
+I see the restaurant.
+I see the supermarket.
+Let's make a town.
+What colors do you like?
+What shapes can you see?
+Can your house stand?
+My name is Stephanie.
+My friends and I go to the movie theater on Saturdays.
+We like watching movies.
+We eat popcorn too.
+Are you the librarian?
+Yes, I am.
+I'm looking for a great book.
+Okay, let's see.
+Is she a salesperson mom?
+I think so.
+Hi, can I help you?
+Yes, we like that purple sofa.
+Do you work here?
+This is for my grandmother.
+My name is Jeff.
+Can I have the steak, please?
+My dog is sick.
+I can help.
+Danny, give the groceries to the cashier.
 Here you are.
-Who works at the supermarket? 
-The cashier works at the supermarket. 
-Who works at the library? 
+Who works at the supermarket?
+The cashier works at the supermarket.
+Who works at the library?
 The librarian works at the library.
-Who works at the post office? 
+Who works at the post office?
 The postal worker works at the post office.
-Who works at the department store? 
-The salesperson works at the department store. 
-Who works at the restaurant? 
+Who works at the department store?
+The salesperson works at the department store.
+Who works at the restaurant?
 The server works at the restaurant.
-Who works at the animal hospital? 
+Who works at the animal hospital?
 The vet works at the animal hospital.
-Where does the cashier work? 
-The cashier works at the supermarket. 
-Where does the server work? 
-The server works at the restaurant. 
-Where does the salesperson work? 
-The salesperson works at the department store. 
-Where does the librarian work? 
-The librarian works at the library. 
-Where does the vet work? 
-The vet works at the animal hospital.
-Where does the postal worker work? 
-The postal worker works at the post office.
+Where does the cashier work?
+Where does the server work?
+Where does the salesperson work?
+Where does the librarian work?
+Where does the vet work?
+Where does the postal worker work?
+What does the cook do?
+The cook makes food.
+What does the salesperson do?
+The salesperson sells things.
+What does the vet do?
+The vet helps sick animals.
+What does the bus driver do?
+What does the pilot do?
+What does the firefighter do?
+Does the cook make food?
+Yes, he does.
+Does the cook sell things?
+Does the vet fly planes?
+Does the firefighter fight fires?
+Yes, she does.
+Does the pilot drive buses?
+Does the salesperson sell things?
+Does the bus driver help sick animals?
+Emma and Anne are shopping for a birthday present for Mom.
+How much is this sweater?
+How much are these shoes?
+It's time to go home.
+Emma, we don't have a present for Mom.
+We can make a present.
+Mom, these are for you.
+Excuse me how much is this sweater?
+Excuse me how much is this coat?
+Excuse me how much is this pen?
+How much is this bike?
+How much is this pen?
+Matt is sick.
+He has a cold.
+He's eating soup.
+Maggie is sick.
+She has a fever.
+The doctor can help her.
+This is Nick.
+He has a stomach ache.
+This is Kelly.
+She's sleeping.
+She has a headache.
+This is my family.
+These are my grandparents.
+My grandfather really likes baseball.
+My grandmother really likes flowers.
+Here are my parents.
+My mother is wearing a purple dress.
+And my father is wearing a white shirt.
+My sister is standing next to me.
+My mother has a brother.
+He's wearing an orange t-shirt.
+She's next to him, and is wearing a pink shirt.
+Do you see his t-shirt?
+He likes karate.
+She has a doll.
+Who are they?
+I can sing.
+Can you dance?
+I can draw.
+I can write in my new notebook.
+Please read this.
+This is a good book.
+I'm reading.
+I'm not writing.
+He's reading.
+He isn't writing.
+She's reading.
+She isn't writing.
+What are you doing?
+We're eating.
+We aren't drinking.
+They're eating.
+They aren't drinking.
+What are they doing?
+I have a new game.
+Let's play.
+Can I play too?
+We're playing.
+Let's dance.
+We're dancing.
+Can I dance too?
+Let's eat.
+Can I eat too?
+Is he playing the guitar?
+Yes, he is.
+Is she playing the guitar?
+Yes, she is.
+Are they playing the guitar?
+Yes, they are.
+Your new books are under the table.
+Mike, your cat is under the sofa.
+The clock is in the box.
+Let's play a game.
+The books are on the bookshelf.
+Is there a bed next to the bookshelf?
+Yes, there is.
+There are two beds in the bedroom.
+Are there two beds in the bedroom?
+Yes, there are.
+Let's clean up.
+There are books under the table.
+The living room's messy, let's clean up.
+We have fingers, we have hands, we can clean up, yes we can.
+The bathroom's messy, let's clean up.
+The bedroom's messy, let's clean up.
+How many pencils are there?
+There are 24 pencils.
+How many markers are there?
+There are 18 markers.
+How many crayons are there?
+There are 64 crayons.
+How many cards are there?
+There are 52 cards.
+How many red pencils are there?
+There are 8 red pencils.
+How many blue pencils are there?
+There are 16 blue pencils.
+How many yellow pencils are there?
+There are 9 yellow pencils.
+There are 33 pencils.
+How many pink books are there?
+There are 10 pink books.
+How many orange books are there?
+There are 7 orange books.
+How many green books are there?
+There are 11 green books.
+How many books are there?
+There are 28 books.
+The sheep is on the chair.
+The whale has a wheel.
+There are three phones.
+Let's play a game of... one o'clock.
+I can see that clock.
+How many clocks are there?
+There are 20 clocks.
+What time is it?
+When do you eat breakfast?
+I eat breakfast at 7 o'clock.
+We eat breakfast at 7 o'clock.
+When does he eat breakfast?
+He eats breakfast at 7 o'clock.
+When does she eat breakfast?
+She eats breakfast at 7 o'clock.
+I eat breakfast at 7:15.
+I like eggs and juice.
+When do you eat lunch?
+I eat lunch at noon.
+I like soup and salad.
+I eat dinner at 6:45.
+Let's play, Dad.
+Let's play, Mike.
+Good night, what time is it?
+It's time for bed, good night what time is it?
+When does he wake up?
+When does she wake up?
+He eats breakfast at 7:30 in the morning.
+He goes to school at 8:15 in the morning.
+He eats lunch at 12:30 in the afternoon.
+He eats a snack at 3:15 in the afternoon.
+He plays soccer at 3:45 in the afternoon.
+He comes home at 5 o'clock in the afternoon.
+He plays the guitar at 5:45 in the evening.
+He watches TV at 6:30 in the evening.
+He eats dinner at 7:15 in the evening.
+He does homework at 8 o'clock at night.
+He goes to bed at 9:45 at night.
+Look at this spider.
+I like science.
+Look at these.
+I like social studies.
+I like art.
+I like math.
+I have a soccer ball.
+I like PE.
+I like music.
+His favorite subject is science.
+Her favorite subject is science.
+Danny goes to karate class on Mondays.
+Julie goes to dance class on Tuesdays.
+Mike goes to swimming class on Wednesdays.
+Jay goes to English class on Thursdays.
+Emma goes to swimming class on Fridays.
+Carla goes to dance class on Saturdays.
+When does he go to karate class?
+He goes to karate class on Tuesdays.
+When does she go to karate class?
+She goes to karate class on Tuesdays.
+Do you speak English?
+Yes, I do.
+Can you play soccer?
+See you.
+My name is Danny.
+I have a sister.
+I like green.
+I like pizza.
+I don't like green pizza.
+I have a brother and a sister.
+My name is Julie.
+I have two brothers.
+I can play soccer.
+I like soccer.
+I have a brother.
+I have a bike.
+I like my bike.
+Today is Sunday.
+There are seven days in the week.
+What day is it today?
+Today is Monday.
+Today is Tuesday.
+Today is Wednesday.
+Today is Thursday.
+Today is Friday.
+Today is Saturday.
+My hands are cold.
+Are you happy?
+Yes I am.
+Are you sad?
+Are you hungry?
+Are you cold?
+Are you hot?
+Is he sick?
+Yes he is.
+Is he excited?
+Is he tired?
+Is she tired?
+Is she bored?
+Yes she is.
+Ready, set, go!
+Are you okay?
+I think so!
+What can he see?
+He can see a bird.
+What can she see?
+She can see a bird.
+What can he hear?
+He can hear a car.
+What can he smell?
+He can smell a flower.
+What can he taste?
+He can taste ice cream.
+What can he touch?
+He can touch a ball.
+What can you see?
+I can see a pen.
+I can touch it too.
+What can you hear?
+I can hear a dog.
+I like dogs.
+What can you smell?
+I can smell bread.
+I can taste it too.
+I can see pizza.
+I can smell it.
+I can hear a bus.
+What can you touch?
+I can touch a flower.
+I can smell it too.
+This is my mother.
+This is my father.
+Are you a doctor?
+My name is Mr. Smith.
+My name is Jay.
+My name is Carla.
+Is he a doctor?
+Is she a doctor?
+They are police officers.
+They are firefighters.
+Are they police officers?
+Are they soccer players?
+Look at me.
+I like trees.
+Danny, be careful.
+May I borrow your phone?
+Excuse me, may I borrow your phone?
+Sure here you are.
+Please, may I borrow your phone?
+Excuse me, may I borrow your pen?
+Please, may I borrow your pen?
+Excuse me, may I borrow your book?
+Please, may I borrow your book?
+May I borrow your pen?
+May I borrow your marker?
+The girl is in the cave.
+The hippo is on the jug.
+I can see six kittens.
+I like steak.
+I don't like steak.
+I like spaghetti.
+I like soup.
+Look, salad.
+I like salad.
+What are those?
+Those are eggs.
+Are those french fries?
+I want soup.
+I don't want soup.
+He wants soup.
+He doesn't want soup.
+She wants soup.
+She doesn't want soup.
+I have apples.
+I don't have apples.
+He has apples.
+He doesn't have apples.
+She has apples.
+She doesn't have apples.
+Do you have apples?
+Does he have apples?
+Does she have apples?
+Do you want an apple?
+Do you want an apple, Anne?
+I have an apple.
+Do you want an orange?
+Do you want a peach?
+Do you want a banana?
+Do you like milk?
+Do you like yogurt?
+Do you like cheese?
+Do you like butter?
+I have a yellow shirt and green pants.
+He has green shoes.
+I have a purple skirt.
+I have gray socks.
+She has red shoes.
+I have blue pants and gray shoes.
+She has a red dress.
+I have a green dress.
+She has a white shirt.
+He's wearing a shirt.
+She's wearing a shirt.
+What's he wearing?
+He's wearing a white shirt and gray pants.
+What's she wearing?
+She's wearing a white shirt and gray pants.
+I'm wearing a cap.
+We're wearing caps.
+I'm wearing a red cap and green shorts.
+We're wearing red caps and green shorts.
+I'm wearing a blue t-shirt.
+I'm wearing orange shorts.
+I'm wearing green sneakers and a red cap on my head.
+I can't find my mother.
+She's wearing a pink t-shirt and black pants.
