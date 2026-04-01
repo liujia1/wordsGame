@@ -22,6 +22,7 @@ const SentenceGame = () => {
   const [autoSwitch, setAutoSwitch] = useState(false); // 自动切换开关（全局状态）
   const [modifiedSlides, setModifiedSlides] = useState({}); // 记录每道题是否有过答题操作（独立变量）
   const [gameRound, setGameRound] = useState(0); // 游戏轮次，用于强制刷新组件
+  const [submitButtonAnimate, setSubmitButtonAnimate] = useState(false); // 提交按钮动画状态
 
   // 读取句子文件
   useEffect(() => {
@@ -57,6 +58,37 @@ const SentenceGame = () => {
       ]);
     }
   }, []);
+
+  // 监听是否到第十题且所有题目都已回答，触发提交按钮动画
+  useEffect(() => {
+    if (gameStarted && questions.length > 0 && currentSlide === questions.length - 1) {
+      const allAnswered = questions.every((_, index) => {
+        const answer = userAnswers[index];
+        return answer && answer.length > 0;
+      });
+      
+      console.log('检查提交按钮动画条件:', {
+        gameStarted,
+        questionsLength: questions.length,
+        currentSlide,
+        allAnswered,
+        userAnswersKeys: Object.keys(userAnswers),
+        userAnswersLength: Object.keys(userAnswers).length
+      });
+      
+      if (allAnswered) {
+        console.log('触发提交按钮动画');
+        // 触发动画
+        setSubmitButtonAnimate(true);
+        // 3秒后停止动画
+        const timer = setTimeout(() => {
+          setSubmitButtonAnimate(false);
+        }, 1500);
+        
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentSlide, userAnswers, questions, gameStarted]);
 
   // 开始游戏
   const startGame = () => {
@@ -541,21 +573,21 @@ const SentenceGame = () => {
               </p>
             </div>
             <style>{`
-              @keyframes fade-out {
-                0% {
-                  opacity: 1;
-                }
-                70% {
-                  opacity: 1;
-                }
-                100% {
-                  opacity: 0;
-                }
-              }
-              .animate-fade-out {
-                animation: fade-out 1.5s ease-in-out forwards;
-              }
-            `}</style>
+          @keyframes fade-out {
+            0% {
+              opacity: 1;
+            }
+            70% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+          .animate-fade-out {
+            animation: fade-out 1.5s ease-in-out forwards;
+          }
+        `}</style>
           </div>
         )}
 
@@ -653,13 +685,32 @@ const SentenceGame = () => {
               </button>
             ) : (
               !Object.values(submitted).some(s => s.submitted) && (
-                <button
-                  onClick={handleSubmit}
-                  className="bg-success hover:bg-green-400 text-white text-xl font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
-                >
-                  ✅ 提交答案
-                </button>
+                <>
+                  <style>{`
+                    @keyframes submit-button-pulse {
+                      0%, 100% {
+                        transform: scale(1);
+                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                        background-color: #22c55e;
+                      }
+                      50% {
+                        transform: scale(1.1);
+                        box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.6);
+                        background-color: #16a34a;
+                      }
+                    }
+                    .animate-submit-button {
+                      animation: submit-button-pulse 0.5s ease-in-out infinite;
+                    }
+                  `}</style>
+                  <button
+                    onClick={handleSubmit}
+                    className={`bg-success hover:bg-green-400 text-white text-xl font-bold px-6 py-3 rounded-lg shadow-lg transform transition-all hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed ${submitButtonAnimate ? 'animate-submit-button' : ''}`}
+                    disabled={Object.keys(userAnswers).length < questions.length || Object.values(userAnswers).some(answer => !answer || answer.length === 0)}
+                  >
+                    ✅ 提交答案
+                  </button>
+                </>
               )
             )}
           </div>
