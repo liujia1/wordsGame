@@ -1,4 +1,4 @@
-﻿My favorite day of the week is Saturday.
+﻿﻿My favorite day of the week is Saturday.
 In the morning, I always make my bed.
 Then, I usually go to the movie theater in the afternoon.
 What do you do on Saturdays?
@@ -806,3 +806,849 @@ I'm wearing orange shorts.
 I'm wearing green sneakers and a red cap on my head.
 I can't find my mother.
 She's wearing a pink t-shirt and black pants.
+This is my friend.
+Sarah likes cats.
+Where is your eye?
+This is your eye.
+I want my t-shirt.
+I wear a t-shirt.
+This is my desk.
+I like drawing.
+I play in the house.
+We see bugs.
+I am happy.
+We have squares.
+It is sunny today.
+It is hot.
+Let's go!
+It is time for school.
+I go by truck.
+I walk to school.
+There are cans.
+Halloween is fun.
+Trick or Treat.
+It is Christmas Day.
+We are at the concert.
+There is an ice piano.
+This is my music box.
+This is my kangaroo.
+We are camping.
+We see many stars.
+Let's make a salad.
+We are at the water park.
+Paper planes are fun!
+Mr. Brown is a good neighbor.
+We like our bike.
+Let's make shadow art.
+Night animals are up too.
+The Moon is up.
+I see with my eyes.
+I hear with my ears.
+I taste the pepper.
+It is hot!
+I am wearing a wool hat.
+We are at the beach.
+I am at the playground.
+We play tag.
+This is my town.
+There is a parade today.
+My street is noisy.
+Today is show and tell.
+Music class is fun.
+I hold things every day.
+I have three neighbors.
+Let's play ping pong.
+There are many sports balls.
+Let's wash our hands.
+We are in safety class.
+Look for the crosswalk.
+My mom plays the piano.
+My uncle plays the guitar.
+My dad plays the drums.
+My mom is the singer.
+Today is Sports Day.
+My family likes sports.
+I have a penpal.
+Her name is Mika.
+She lives in Japan.
+These are my friends.
+Mia wants to be a singer.
+I want to be a pilot.
+We go on a picnic.
+We meet a lot of food.
+I want to make a new drink.
+I get a big bowl.
+The jungle is big and green.
+Many animals live there.
+My mom and I go to the pet shop.
+Sue loves swimming.
+Let's play soccer.
+Today is Father's day.
+Patty is an artist.
+She loves to paint faces.
+Welcome to my birthday party!
+Mom and Dad come home.
+She is a baby.
+Time to go to school.
+Will likes numbers.
+His favorite subject is math.
+It is fall.
+It is time to start school.
+Bob is hungry and he meows.
+I feed him.
+I play with my little brother.
+We play hide and seek.
+Every day is fun at school.
+Monday is art day.
+Yay! It is the weekend!
+We can watch TV!
+Bunny sees a green sprout.
+Plants are living things.
+Welcome to the museum.
+Please don't touch things.
+Tommy uses a tissue.
+Tommy always washes his hands.
+We visit the Christmas Market.
+We are very excited.
+It is Chinese New Year's Day.
+It is Festival Time.
+Lizzy and Maggie make bracelets.
+They make friendship bracelets.
+Let's make a pot.
+What is this animal in the sea?
+It is a dolphin.
+Let's go snorkeling.
+We go to the monkey forest.
+Crow is very greedy.
+Fox is very clever.
+Tom is painting a wall.
+Hi, Nurse Ned.
+I don't feel so good.
+My throat is tickly.
+My head is hot.
+My nose is runny.
+It is time for class!
+I open my book and read!
+Mike is at the library.
+He reads quietly.
+Mum is very happy.
+Let's make a string phone.
+We go to the pumpkin patch.
+We pick pumpkins.
+I help my grandparents on the farm.
+Spring is here.
+Flowers bloom on the tree.
+We go to the treehouse every day.
+What animal am I?
+I am a desert fox.
+Is this our home, Mama?
+Cicadas and fireflies are insects.
+The grasshopper plays every day.
+The ant works every day.
+Mr. Winkle is my neighbor.
+I like to help him.
+Our house has too many sounds.
+This is my mom.
+This is my dad.
+This is my sister.
+This is my dog.
+I love my family.
+My brother has eyes.
+I have eyes.
+My brother has hands.
+I have hands.
+My brother has legs.
+I have legs.
+My brother has arms.
+I have arms.
+We draw pictures.
+We jump together.
+We read books.
+Sarah likes birds.
+Sarah likes fish.
+Sarah likes frogs too.
+This is red.
+This is green.
+This is yellow.
+This is blue.
+Here is red.
+Here is white.
+It is pink.
+I want orange.
+It is purple.
+It is orange.
+Where is my t-shirt?
+Where is my skirt?
+Where is my hat?
+Where is my bag?
+Mom has my bag.
+I wear shorts.
+I wear socks.
+I wear shoes.
+This is my pencil.
+This is my eraser.
+This is my book.
+This is not my pencil.
+I draw a watermelon.
+I draw apples.
+I draw oranges.
+I draw bananas.
+I play in the kitchen.
+I play in the bathroom.
+I play in the bedroom.
+I see one bug.
+She sees two bugs.
+We see three bugs.
+We see four bugs.
+I am tired.
+I am angry.
+I am sad.
+We have rectangles.
+We have circles.
+I only have triangles.
+It is sunny and hot.
+It is snowy and cold.
+Let's run!
+Let's walk!
+Let's jump!
+It is raining.
+I go with dad.
+I go by car.
+I go with mom.
+I go by bus.
+I go with friends.
+I see garbage every day.
+There are cups.
+There are bottles.
+I pick garbage here.
+I pick garbage there.
+You are a monster.
+Here is your candy.
+You are a ghost.
+You are a witch.
+It is cold.
+We like sledding.
+We like hot drinks.
+We like Santa.
+We like swimming.
+We like cold drinks.
+Wow! Everything is ice!
+There is an ice cello.
+There is an ice flute.
+There is an ice harp.
+Let's dance together.
+What is in it?
+A ballerina.
+She can sing.
+She can dance.
+She can go round and round.
+Look at the ears.
+Look at the nose.
+Look at the paws.
+Look at the tail.
+Look at the pouch.
+What is in the pouch?
+A baby kangaroo.
+Let's hop together.
+I hear a bee.
+I hear a bear.
+I hear a lion.
+He is snoring.
+We have tomatoes.
+Put them in the bowl.
+We have carrots.
+We have lettuce.
+We have corn.
+Put some dressing.
+Mix everything.
+Have an apple.
+Have a carrot.
+Have a banana.
+Have an avocado.
+It's yummy.
+Have an orange.
+Have a tomato.
+Have a cucumber.
+Have a peach.
+We are in the pool.
+We ride the slide.
+I see a tube.
+My brother sees a ball.
+We see a unicorn.
+We make big planes.
+We make small planes.
+We make fast planes.
+We make slow planes.
+It is time to fly!
+We fly the paper planes!
+He helps everyone.
+He helps the gardener.
+He helps the baker.
+He helps the mailman.
+He helps the cat too.
+We ride to the pool.
+We ride to the library.
+We ride to the market.
+We ride to the pet shop.
+We ride home together.
+The sun is up.
+There is a shadow.
+We trace the tree.
+We trace the bike.
+We trace the bench.
+The sun is down.
+Look at our shadow art.
+It is dark.
+Owls have good eyes.
+Foxes have good ears.
+Raccoons have good noses.
+Night animals go to bed.
+I am scared.
+I am not scared.
+I am very happy.
+I taste the lemon.
+It is sour!
+I taste the coffee.
+It is bitter!
+I taste the cupcake.
+It is sweet!
+We eat the cupcakes.
+I am wearing a scarf.
+I am wearing mittens.
+I am wearing boots.
+I am in the snow.
+I move my arms.
+I move my legs.
+I make a snow angel.
+We look for crabs.
+We look for starfish.
+We look for seashells.
+We jump in the water.
+I splash my dad.
+I splash my mom.
+I splash my sister.
+I play on the swing.
+This is not fun.
+I play on the tires.
+I see Sam.
+We play on the seesaw.
+I go down.
+Sam goes up.
+This is fun.
+We run on the grass.
+I am it.
+I run after Mia.
+I touch her arm.
+Mia is it.
+She touches his back.
+Ben is it.
+He touches my shoulder.
+The parade goes by the playground.
+People clap.
+The parade goes by the school.
+The parade goes by the bank.
+I go by the candy store.
+I am in the parade.
+The cars honk.
+I move my body.
+The bus beeps.
+The people talk.
+The birds sing.
+My street makes music.
+Patty shows a doll.
+It is special.
+David shows a baseball.
+Tina and Terry show a book.
+I show our class picture.
+We are special.
+We sing and play.
+It has black and white keys.
+It makes music.
+It has two sticks.
+It has four strings.
+Let's make music together.
+I hold many things.
+I hold the window.
+I hold the door.
+I hold the gate.
+I hold hands.
+Betty has three dogs.
+She needs help.
+We walk together.
+Jim has a baby sister.
+He needs help.
+We play together.
+Lisa has a pretty garden.
+We dig together.
+We are good friends.
+We take out the net.
+We take out the ball.
+We take out the paddles.
+Ted hits the ball.
+I hit the ball.
+Oops, I miss.
+Ted gets a point.
+This is a basketball.
+It is big and orange.
+It feels bumpy.
+This is a tennis ball.
+It is small and green.
+It feels fuzzy.
+This is a soccer ball.
+It is black and white.
+It feels smooth.
+My mom washes her hands.
+I wash my hands.
+My mom uses soap.
+I use soap.
+My mom uses warm water.
+My mom uses a towel.
+We have clean hands.
+Let's cross the street safely.
+We cross here.
+Look for the red man.
+We stop and wait.
+Look for the green man.
+We stop and look.
+Look to the left.
+Look to the right.
+No cars then cross the street.
+My mom plays the piano quietly.
+My uncle plays the guitar quietly.
+My dad plays the drums quietly.
+She sings loudly.
+My mom plays with my dad.
+They play tennis.
+My mom wins.
+My sister plays with my brother.
+They play badminton.
+My sister wins.
+I play with my dog.
+We play catch.
+We are happy.
+I live in Canada.
+She eats with chopsticks.
+I eat with a fork.
+She likes sushi.
+She sleeps on a mat.
+I sleep on a bed.
+We are different.
+We are best friends.
+We are in art class.
+She makes a microphone.
+Jack wants to be a tennis player.
+He makes a tennis ball.
+I make a paper plane.
+We are kids now.
+We play.
+We meet sandwiches.
+Joy brings four sandwiches.
+We meet cookies.
+Justin brings ten cookies.
+We meet oranges.
+Carl brings five oranges.
+There are so many ants.
+They are hungry too.
+We meet more food.
+I get some juice.
+I put the juice in the bowl.
+I get some tomatoes.
+I put the tomatoes in the bowl.
+I get some grapes.
+I put the grapes in the bowl.
+I mix everything together.
+Try it.
+Is it good?
+Can you see the animals?
+Snakes live in the jungle.
+They are long and green.
+Monkeys live in the jungle.
+They are cute and brown.
+Tigers live in the jungle.
+They are orange and black.
+Can you live in the jungle?
+We look at the pets.
+Can we get six puppies?
+My mom says no.
+Can we get nine kittens?
+Can we get one fish?
+My mom says yes.
+We take our new fish home.
+She swims everywhere.
+Sue goes to the ocean.
+She loves swimming in the ocean.
+Sue goes to the lake.
+She loves swimming in the lake.
+Sue goes to the river.
+She loves swimming in the river.
+Sue goes home.
+She loves swimming in the bathtub.
+What do we need?
+We need a soccer ball.
+Let's find a soccer ball.
+We need a soccer field.
+Let's find a soccer field.
+We need two goals.
+Let's find two goals.
+We need players.
+We have you and me.
+Now we can play soccer.
+Kay and I have a surprise.
+Kay takes the blue chalk.
+She draws a blue sky.
+I take the red chalk.
+I draw a red plane.
+Kay and I take the white chalk.
+We draw clouds.
+Dad comes home.
+He is surprised.
+Happy Father's Day Dad.
+She paints a tiger face.
+It is really scary.
+She paints a cat face.
+It is really cute.
+She paints a dog face.
+It is really funny.
+She paints on faces.
+Patty loves to paint on faces.
+My friends have presents for me.
+Jack gives me one present.
+Aimee gives me two presents.
+Greg and Lisa give me three presents.
+I surprise my friends.
+I give them each a present.
+How many presents do we have?
+They bring my new sister.
+I am not a baby.
+She cries loudly.
+I hold her in my arms.
+She smiles happily.
+She sleeps quietly.
+I am her big brother.
+Shary likes books.
+Her favorite subject is reading.
+Billy likes sports.
+His favorite subject is PE.
+Jenny likes singing.
+Her favorite subject is music.
+Paul likes numbers, books, sports, and singing.
+Paul loves school.
+We need pencils and books.
+It is winter.
+It is time to wear warm clothes.
+We need coats and hats.
+It is spring.
+It is time to plant a garden.
+We need flowers and dirt.
+It is summer.
+It is time to go on vacation.
+Bob is thirsty and he meows.
+I give him water.
+Bob is bored and he meows.
+I play with him.
+Bob is scared and he meows.
+I hug him.
+Bob is sleepy.
+He jumps on my bed.
+He sleeps on my head.
+Sweet dreams Bob.
+I count to ten.
+I open my eyes.
+Where is my brother?
+Is he in the bedroom?
+Is he behind the door?
+Is he in the living room?
+Is he behind the curtains?
+Oh, there he is.
+He is in the kitchen.
+He is eating cookies.
+We make crafts.
+Tuesday is story day.
+We listen to stories.
+Wednesday is music day.
+We sing songs.
+We dance.
+Thursday is sports day.
+We play baseball.
+We play soccer.
+Friday is game day.
+What can we do?
+We can watch cartoons!
+We can bake cookies!
+We can bake chocolate cookies!
+We can play outside!
+We can play catch!
+We can ride our bikes!
+We can ride our scooters!
+We love the weekend!
+Bunny pulls the sprout.
+The sprout does not come out.
+Squirrel helps bunny.
+Skunk helps squirrel and bunny.
+Hedgehog helps skunk, squirrel and bunny.
+The sprout comes out.
+A big orange carrot comes out too.
+They grow everywhere.
+Some plants are big and strong.
+Some plants are small and weak.
+Trees are plants.
+They have a trunk.
+They have roots.
+They have many branches.
+They have many leaves.
+Flowers are plants.
+They have a stem.
+They have leaves.
+They have many colors.
+Please follow the rules.
+Please don't touch things in the museum.
+Please look with your eyes.
+Please don't run in the museum.
+Please walk with quiet steps.
+Please don't shout in the museum.
+Please talk with low voices.
+Please don't eat in the museum.
+Please eat outside.
+Thank you for visiting the museum.
+Please come again.
+Tommy uses a tissue for his runny nose.
+Tommy has a cough.
+Tommy uses a mask.
+Tommy uses a mask for his cough.
+Tommy has good health manners.
+Look at the ornaments.
+They are colorful and pretty.
+Look at the cookies.
+They are sweet and yummy.
+Look at the lights.
+They are bright and shiny.
+Look at the trees.
+They are tall and pointy.
+There are so many things.
+We love the Christmas Market.
+There are colorful dragons.
+They spin and jump in the street.
+There are fun parades.
+Dancers walk and dance in the parades.
+There are loud fireworks.
+They pop and light up in the sky.
+There are happy faces.
+People smile and laugh at the festival.
+The festival is exciting.
+Lizzy picks three strings.
+She picks pink, blue and green.
+She braids the strings.
+Maggie picks three strings.
+She picks yellow, orange and red.
+Maggie gives her bracelet to Lizzy.
+Lizzy gives her bracelet to Maggie.
+They like their friendship bracelets very much.
+First pick up some clay.
+It feels thick and cold.
+Next pat it with your hands.
+It feels thin and flat.
+Then roll it around on the table.
+It feels smooth and round.
+Finally press it with your thumbs.
+It feels mushy and soft.
+It is time to dry the pot.
+Dry it on the shelf.
+It jumps very high.
+It can swim and surf too.
+It makes many sounds.
+It can whistle and click too.
+It plays with friends.
+It can play with people too.
+It splashes around.
+It can make waves too.
+Can you guess this animal?
+Let's get ready to snorkel.
+Put the goggles over your eyes.
+They help you see.
+Put the tube in your mouth.
+It helps you breathe.
+Put the fins on your feet.
+They help you swim.
+Are you ready to see the fish?
+Are you ready to see the coral too?
+Yes, I'm ready to snorkel.
+Pam eats a cookie in the forest.
+The monkeys take the cookie.
+Harry says, don't eat.
+Pam runs in the forest.
+The monkeys run too.
+Harry says, don't run.
+Pam shouts in the forest.
+The monkey shouts too.
+Harry says, don't shout.
+Pam stops eating, running and shouting.
+The monkeys are happy now.
+Crow does not share the cheese.
+Fox wants the cheese.
+Crow, you are so handsome.
+You are strong too.
+Crow is happy.
+He smiles.
+Crow, you are so smart.
+You are kind too.
+He laughs.
+The cheese falls to the ground.
+Fox takes the cheese.
+Thank you, Crow.
+Tom waves to Mary.
+Mary come and paint with me.
+Mary paints a tall green tree.
+Tom waves to Jack.
+Jack come and paint with me.
+Jack paints three blue birds.
+Tom waves to Sarah.
+Sarah come and paint with me.
+Sarah paints many colorful flowers.
+They paint the wall together.
+The wall is beautiful.
+What's wrong?
+Nurse Ned gives me throat candy.
+Nurse Ned gives me a cool towel.
+Nurse Ned gives me a tissue.
+I eat the throat candy.
+I put the cool towel on my head.
+I blow my nose.
+I feel better.
+Thank you, Nurse Ned.
+It is 9 o'clock!
+It is 10 o'clock!
+It is time for recess!
+I run outside and play!
+It is 12 o'clock!
+It is time for lunch!
+I go to the cafeteria and eat!
+It is 3 o'clock!
+It is time to go home!
+I go home and rest!
+Mike talks loudly.
+The librarian shakes her head.
+No talking in the library.
+Mike sings loudly.
+No singing in the library.
+Mike eats a cookie.
+No eating in the library.
+Mike runs around.
+No running in the library.
+Mike sits down.
+He picks up a book.
+The librarian is happy.
+I have a paper cup.
+You have a paper cup.
+I make a hole in the cup.
+You make a hole in the cup.
+I put the string through the hole.
+You put the string through the hole.
+I go to this room.
+You go to that room.
+Can you hear me?
+Yes, I can hear you.
+Wow, it really works.
+Molly picks a pumpkin.
+It is small and flat.
+I like my pumpkin.
+Todd picks a pumpkin.
+It is big and round.
+Jessa picks a pumpkin.
+It is long and thin.
+I pick a pumpkin.
+It is square and bumpy.
+We like our pumpkins.
+Fall is a busy time.
+We go to the field.
+We pick the corn.
+We put it in the basket.
+We go to the orchard.
+We pick the apples.
+We put them in the basket.
+We go to the garden.
+We pick the beets.
+We go to the market.
+Everyone likes our corn, apples and beets.
+They are white and pink.
+They are pretty.
+Summer is here.
+Cherries grow on the tree.
+They are red and yellow.
+They are yummy.
+Fall is here.
+Leaves fall from the tree.
+They are red and brown.
+They are beautiful.
+Winter is here.
+The leaves are on the tree.
+They are all gone.
+See you next spring.
+We bring books on Monday.
+We read books together.
+We bring paper and crayons on Tuesday.
+We draw pictures together.
+We bring pizza on Wednesday.
+We eat pizza together.
+We bring a ukulele on Thursday.
+We sing songs together.
+We bring board games on Friday.
+We play games together.
+It rains on Saturday and Sunday.
+We stay home.
+I have big ears.
+They are large and pointy.
+I can hear very well.
+I have big eyes.
+They are black and round.
+I can see very well.
+I have small feet.
+They are small and hairy.
+I can walk on hot sand.
+I have thick fur.
+It is soft and fluffy.
+I can feel warm at night.
+No, it isn't.
+This is a cactus.
+We see a dark black hole.
+This is our home.
+Mama and I love our new home.
+Cicadas and fireflies are alike.
+They have three body parts.
+They have two pairs of wings.
+They have six legs.
+Cicadas and fireflies are different.
+Cicadas like trees.
+They make loud sounds.
+They make sounds during the day.
+Fireflies like grass.
+They make bright lights.
+They make lights at night.
+Cicadas and fireflies are alike and different.
+The grasshopper sings every day.
+The grasshopper sleeps every day.
+The grasshopper dances every day.
+Winter comes.
+The grasshopper is cold and hungry.
+The ant is warm and full.
+Come inside, let's eat together.
+The ant shares food with the grasshopper.
+The box is heavy.
+I carry the box for him.
+Mr. Winkle says thank you.
+The dog is bored.
+I make a toy for his dog.
+The garden is big.
+I water the flowers for him.
+Mr. Winkle is happy.
+I am happy too.
+Mom is in the bathroom.
+Mom gives Teddy a bath.
+It is too loud.
+Dad is in the kitchen.
+Dad washes the pots.
+Edna is in the living room.
+Edna plays the piano.
+I yell.
+Be quiet.
+Everyone stops.
+It is too quiet.

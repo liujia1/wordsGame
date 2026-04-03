@@ -66,25 +66,33 @@ const SentenceGame = () => {
         const answer = userAnswers[index];
         return answer && answer.length > 0;
       });
-      
+        
+      // 检查最后一题的答题区是否被填满
+      const lastSlideAnswer = userAnswers[currentSlide];
+      const lastSlideWords = questions[currentSlide] ? splitSentence(questions[currentSlide]) : [];
+      const lastSlideFilled = lastSlideAnswer && lastSlideAnswer.length === lastSlideWords.length;
+        
       console.log('检查提交按钮动画条件:', {
         gameStarted,
         questionsLength: questions.length,
         currentSlide,
         allAnswered,
         userAnswersKeys: Object.keys(userAnswers),
-        userAnswersLength: Object.keys(userAnswers).length
+        userAnswersLength: Object.keys(userAnswers).length,
+        lastSlideFilled,
+        lastSlideAnswerLength: lastSlideAnswer?.length,
+        lastSlideWordsLength: lastSlideWords.length
       });
-      
-      if (allAnswered) {
+        
+      if (allAnswered && lastSlideFilled) {
         console.log('触发提交按钮动画');
         // 触发动画
         setSubmitButtonAnimate(true);
-        // 3秒后停止动画
+        // 3 秒后停止动画
         const timer = setTimeout(() => {
           setSubmitButtonAnimate(false);
         }, 1500);
-        
+          
         return () => clearTimeout(timer);
       }
     }
@@ -691,12 +699,10 @@ const SentenceGame = () => {
                       0%, 100% {
                         transform: scale(1);
                         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                        background-color: #22c55e;
                       }
                       50% {
                         transform: scale(1.1);
                         box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.6);
-                        background-color: #16a34a;
                       }
                     }
                     .animate-submit-button {
