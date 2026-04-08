@@ -1,6 +1,46 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { splitSentence, shuffleArray } from '../utils/gameHelpers';
 
+// 播放点击音效（更像真实的click声）
+const playClickSound = () => {
+  try {
+    // 复用AudioContext以避免创建延迟
+    if (!window.audioContext) {
+      window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    const audioContext = window.audioContext;
+    
+    // 恢复音频上下文（在用户交互后可能需要）
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    
+    // 创建一个振荡器
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // 使用方波，更像click声
+    oscillator.type = 'square';
+    
+    // 快速的频率下降，模拟机械click
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.05);
+    
+    // 快速的音量包络，消除延迟感
+    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    // 立即播放
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  } catch (error) {
+    console.log('Click sound failed:', error);
+  }
+};
+
 /**
  * 单词卡片组件（点击式）
  */
@@ -136,6 +176,9 @@ const WordSlide = ({
   const handleWordClick = useCallback((word, originalIndex) => {
     if (isSubmitted) return;
     
+    // 立即播放点击音效，消除延迟感
+    setTimeout(() => playClickSound(), 0);
+    
     // 检查是否已经放置（通过 originalIndex 判断）
     const wordIndexInShuffled = shuffledWords.findIndex(w => w.originalIndex === originalIndex);
     if (wordIndexInShuffled === -1) {
@@ -195,6 +238,9 @@ const WordSlide = ({
   // 点击答案区的单词 -> 移除
   const handleAnswerClick = useCallback((index) => {
     if (isSubmitted) return;
+    
+    // 立即播放点击音效，消除延迟感
+    setTimeout(() => playClickSound(), 0);
     
     // 安全检查：确保 index 在有效范围内
     if (index < 0 || index >= userAnswer.length) {
